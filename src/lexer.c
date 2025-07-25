@@ -22,13 +22,15 @@ void printBuffer(){
 }
 
 
-char simbToChar(const enum constTok m){
+char simbToChar(const enum labelTok m){
 
     switch(m){
         case PLUS:return '+';break;
         case MINUS:return '-';break;
         case DOT:return '*'; break;
         case DIV:return '/'; break;
+        case LEFTPAR:return'(';break;
+        case RIGHTPAR:return ')';break;
     }
 }
 token getNextToken(){
@@ -50,12 +52,14 @@ token getNextToken(){
             case '-':temp -> element.simb = MINUS;break;
             case '*':temp -> element.simb = DOT;break;
             case '/':temp -> element.simb = DIV;break;
+            case '(':temp -> element.simb = LEFTPAR;break;
+            case ')':temp -> element.simb = RIGHTPAR;break;
             default:{
                 fprintf(stderr, "Symbol not recognized\n");
                 exit(EXIT_FAILURE);
             }
         }
-        temp -> label = OP;
+        temp -> label = temp -> element.simb;
         temp -> next = list;
         list = temp;
 

@@ -24,19 +24,17 @@
  * la clase de simbolo que nos encontramos ¡
  */
 
-enum constTok{
-    PLUS, MINUS, DOT, DIV
-};
 
 enum labelTok{
-    NUM, OP
+    NUM,    LEFTPAR,    RIGHTPAR,
+    PLUS,   MINUS,  DOT,        DIV
 };
 
 
 typedef struct node{
     union{
         char *lexeme;
-        enum constTok simb;
+        enum labelTok simb;
     }element;
 
     enum labelTok label;
@@ -53,7 +51,7 @@ void initBuffer();
 void printBuffer();
 
 
-char simbToChar(enum constTok);
+char simbToChar(enum labelTok);
 
 
 //getNextToken -> token
