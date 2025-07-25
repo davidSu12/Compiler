@@ -2,37 +2,21 @@
 #include "lexer.h"
 
 
+#define DEBUG
+
 int main(int argc, char ** argv){
 
+    token m;
     initBuffer();
 
 
-
 #ifdef DEBUG
-    token m = getNextToken();
-    if(m -> string == STRING){
-        printf("%s", m -> element.lexeme);
-    }else{
-        printf("%c", simbToChar(m ->element.simb));
-    }
-    m = getNextToken();
-    if(m -> string == STRING){
-        printf("%s", m -> element.lexeme);
-    }else{
-        printf("%c", simbToChar(m ->element.simb));
-    }
-    m = getNextToken();
-    if(m -> string == STRING){
-        printf("%s", m -> element.lexeme);
-    }else{
-        printf("%c", simbToChar(m ->element.simb));
-    }
-
-    m = getNextToken();
-    if(m -> string == STRING){
-        printf("%s", m -> element.lexeme);
-    }else{
-        printf("%c", simbToChar(m ->element.simb));
+    while((m = getNextToken()) != NULL){
+        if(m -> string == STRING){
+            printf("%s", m -> element.lexeme);
+        }else{
+            printf("%c", simbToChar(m ->element.simb));
+        }
     }
 #endif
 

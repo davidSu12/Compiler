@@ -12,7 +12,7 @@ static ListToken list;
 
 
 void initBuffer(){
-    memset(buff, END, MAX_LEN_BUFF);
+    memset(buff, (char)END, MAX_LEN_BUFF);
     fgets(buff, MAX_LEN_BUFF -1, stdin);
     lexemeBegin = currPosition = buff;
 }
@@ -32,11 +32,12 @@ char simbToChar(const enum constTok m){
     }
 }
 token getNextToken(){
-    token temp = malloc(sizeof(struct node));
 
-    if(*currPosition == END){
+
+    if(*currPosition == END || *currPosition == '\n'){
         return NULL;
     }
+    token temp = malloc(sizeof(struct node));
     if(!temp){
         fprintf(stderr, "Error in getNextToken (No more memory available)\n");
         exit(EXIT_FAILURE);
