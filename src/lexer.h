@@ -25,7 +25,12 @@
  */
 
 enum constTok{
-    PLUS, MINUS, DOT, DIV};
+    PLUS, MINUS, DOT, DIV
+};
+
+enum labelTok{
+    NUM, OP
+};
 
 
 typedef struct node{
@@ -33,7 +38,8 @@ typedef struct node{
         char *lexeme;
         enum constTok simb;
     }element;
-    bool string; //this tells if the element is lexeme or simb
+
+    enum labelTok label;
     struct node * next;
 }node;
 
@@ -56,6 +62,8 @@ char simbToChar(enum constTok);
 token getNextToken();
 
 
+
+//a few functions just to work on the token list
 void deleteListToken();
 bool isEmptyList();
 

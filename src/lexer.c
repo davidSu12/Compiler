@@ -55,7 +55,7 @@ token getNextToken(){
                 exit(EXIT_FAILURE);
             }
         }
-        temp -> string = NOTSTRING;
+        temp -> label = OP;
         temp -> next = list;
         list = temp;
 
@@ -75,7 +75,7 @@ token getNextToken(){
         printf("%s",lexeme);
 #endif
         temp -> element.lexeme = lexeme;
-        temp -> string = STRING;
+        temp -> label = NUM;
         temp -> next = list;
         list = temp;
 
@@ -103,6 +103,8 @@ void deleteListToken(){
 
     assert(list == NULL);
 }
+
+
 bool isEmptyList(){
     return list == NULL;
 }

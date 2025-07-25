@@ -12,10 +12,12 @@ int main(int argc, char ** argv){
 
 #ifdef DEBUG
     while((m = getNextToken()) != NULL){
-        if(m -> string == STRING){
-            printf("%s", m -> element.lexeme);
+        if(m -> label == NUM){
+
+            //printf("longitud: %d\t",(int) strlen(m->element.lexeme));
+            printf("%s\n", m -> element.lexeme);
         }else{
-            printf("%c", simbToChar(m ->element.simb));
+            printf("%c\n", simbToChar(m ->element.simb));
         }
     }
 #endif
