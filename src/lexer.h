@@ -8,6 +8,8 @@
 #include <ctype.h>
 #include <assert.h>
 
+
+#define END '\0'
 #define MAX_LEN_BUFF 1024
 #define LNULL NULL
 #define ISNULLTOKEN(s) (s == LNULL)

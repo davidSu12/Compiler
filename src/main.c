@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "lexer.h"
 
-#define DEBUG
-
 
 int main(int argc, char ** argv){
 
@@ -29,6 +27,14 @@ int main(int argc, char ** argv){
     }else{
         printf("%c", simbToChar(m ->element.simb));
     }
-    return 0;
+
+    m = getNextToken();
+    if(m -> string == STRING){
+        printf("%s", m -> element.lexeme);
+    }else{
+        printf("%c", simbToChar(m ->element.simb));
+    }
 #endif
+
+    return 0;
 }

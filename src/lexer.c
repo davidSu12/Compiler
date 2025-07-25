@@ -12,7 +12,7 @@ static ListToken list;
 
 
 void initBuffer(){
-    memset(buff, EOF, MAX_LEN_BUFF);
+    memset(buff, END, MAX_LEN_BUFF);
     fgets(buff, MAX_LEN_BUFF -1, stdin);
     lexemeBegin = currPosition = buff;
 }
@@ -34,7 +34,7 @@ char simbToChar(const enum constTok m){
 token getNextToken(){
     token temp = malloc(sizeof(struct node));
 
-    if(*currPosition == EOF){
+    if(*currPosition == END){
         return NULL;
     }
     if(!temp){
@@ -68,7 +68,7 @@ token getNextToken(){
             exit(EXIT_FAILURE);
         }
 
-        *(lexeme + (currPosition - lexemeBegin)) = EOF;
+        *(lexeme + (currPosition - lexemeBegin)) = END;
         memcpy(lexeme, lexemeBegin, (currPosition - lexemeBegin));
 #ifdef DEBUG
         printf("%s",lexeme);
