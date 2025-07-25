@@ -84,3 +84,25 @@ token getNextToken(){
 
     return temp;
 }
+
+
+void deleteListToken(){
+    token temp;
+
+    if(isEmptyList()){
+        return;
+    }
+
+    do{
+        temp = list;
+        free(temp);
+        list = list -> next;
+    }while(list != NULL);
+
+
+
+    assert(list == NULL);
+}
+bool isEmptyList(){
+    return list == NULL;
+}

@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "lexer.h"
 
-
 #define DEBUG
 
 int main(int argc, char ** argv){
 
     token m;
     initBuffer();
+
 
 
 #ifdef DEBUG
@@ -20,5 +20,6 @@ int main(int argc, char ** argv){
     }
 #endif
 
+    deleteListToken();
     return 0;
 }

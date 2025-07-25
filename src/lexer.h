@@ -56,4 +56,7 @@ char simbToChar(enum constTok);
 token getNextToken();
 
 
+void deleteListToken();
+bool isEmptyList();
+
 #endif //LEXER_H
