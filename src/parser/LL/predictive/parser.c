@@ -10,12 +10,15 @@ void expr(){
 
 }
 void exprP(){
-
-    lookahead = getNextToken();
+    if(lookahead == NULL){
+        return;
+    }
     if(lookahead -> label == PLUS){
+        match(PLUS);
         term();
         exprP();
     }else if(lookahead -> label == MINUS){
+        match(MINUS);
         term();
         exprP();
     }else{
@@ -29,7 +32,9 @@ void term(){
 
 }
 void termP(){
-    lookahead = getNextToken();
+    if(lookahead == NULL){
+        return;
+    }
     if(lookahead -> label == DOT){
         factor();
         termP();
@@ -41,8 +46,6 @@ void termP(){
     }
 }
 void factor(){
-
-    lookahead = getNextToken();
     if(lookahead -> label == NUM){
         lookahead = getNextToken();
     }else{
@@ -52,6 +55,7 @@ void factor(){
     }
 }
 void match(enum labelTok tok){
+
     if(tok != lookahead -> label){
         fprintf(stderr, "Syntax error. Aborting compilation\n");
         exit(EXIT_FAILURE);

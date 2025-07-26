@@ -12,6 +12,9 @@ void test();
 
 int main(int argc, char ** argv){
 
+
+    initBuffer();
+    expr();
     return 0;
 }
 
