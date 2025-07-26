@@ -15,11 +15,12 @@ static bool pushLabel(enum labelTok label){
     temp -> item = label;
     temp -> next = stackProd;
     stackProd = temp;
+    assert(!isEmptyStack());
     return true;
 }
 
 bool pushProduction(production *el){
-    for(int i = el ->longitud_body; i >= 0; i--){
+    for(int i = (el ->longitud_body)-1; i >= 0; i--){
         enum labelTok temp = el -> body[i];
         if(!pushLabel(temp)){
             /*
@@ -36,12 +37,14 @@ bool pushProduction(production *el){
             }
             return false;
         }
+
     }
+    assert(!isEmptyStack());
     return true;
 }
 
-enum labelTok peekProduction(){
-    if(!isEmptyStack()){
+enum labelTok peekLabel(){
+    if(isEmptyStack()){
         fprintf(stderr, "Stack of labels is empty\n");
         return -1;
     }

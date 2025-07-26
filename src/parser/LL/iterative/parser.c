@@ -22,8 +22,11 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
         free(temp);
         exit(EXIT_FAILURE);
     }
-    for(int i = 0; i < longitud_array; i++){
-        temp -> body[i] = body[i];
+
+    memcpy(temp -> body, body, sizeof(enum labelTok) * longitud_array);
+
+    for(int i = 0; i< longitud_array; i++){
+        assert(temp -> body[i] == body[i]);
     }
     temp -> longitud_body = longitud_array;
     return temp;
