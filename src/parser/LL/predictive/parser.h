@@ -6,13 +6,13 @@
 
 
 
-void expr(); //this is my first symbol
-void exprP();
-void term();
-void termP();
-void factor();
+bool expr(void); //this is my first symbol
+void exprP(void);
+void term(void);
+void termP(void);
+void factor(void);
 void match(enum labelTok simbolo);
-void initParser();
+void initParser(void);
 
 
 #endif PARSER_H

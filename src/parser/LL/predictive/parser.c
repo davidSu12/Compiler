@@ -15,11 +15,12 @@ static void SyntaxError(void) {
 void initParser(){
     lookahead = getNextToken();
 }
-void expr(void){
+bool expr(void){
 #ifdef DEBUG
     fprintf(stdout, "expr()\n");
 #endif
     term();exprP();
+    return true;
 }
 void exprP(void){
 #ifdef DEBUG
