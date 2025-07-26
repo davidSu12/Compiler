@@ -3,7 +3,6 @@
 
 static token lookahead;
 
-
 /**
  * auxiliar function to raise a syntax error
  */
@@ -15,12 +14,24 @@ static void SyntaxError(void) {
 void initParser(){
     lookahead = getNextToken();
 }
-bool expr(void){
+
+bool parse(void){
+    expr();
+    if(lookahead == NULL){
+        return true;
+    }else{
+        SyntaxError();
+    }
+}
+
+void expr(void){
 #ifdef DEBUG
     fprintf(stdout, "expr()\n");
 #endif
+    /*
+     * error en la segunda llamada al expr
+     */
     term();exprP();
-    return true;
 }
 void exprP(void){
 #ifdef DEBUG
@@ -37,12 +48,13 @@ void exprP(void){
         match(MINUS);
         term();
         exprP();
-    }else if(lookahead != NULL){
-        SyntaxError();
     }else{
-        //we are in the empty string
+#ifdef DEBUG
+        fprintf(stdout, "pass symbol\n");
+#endif
         return;
     }
+
 
 }
 void term(void){
@@ -68,8 +80,6 @@ void termP(void){
         match(DIV);
         factor();
         termP();
-    }else if(lookahead != NULL){
-        SyntaxError();
     }else{
         return;
     }
@@ -107,8 +117,10 @@ void match(enum labelTok simbolo){
     }
 #ifdef DEBUG
     fprintf(stdout, "match()\n");
+    printf("%c\n", simbToChar(simbolo));
 #endif
     if(lookahead -> label == simbolo){
+
         lookahead = getNextToken();
     }else{
 #ifdef DEBUG

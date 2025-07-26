@@ -27,7 +27,7 @@
 
 enum labelTok{
     NUM,    LEFTPAR,    RIGHTPAR,
-    PLUS,   MINUS,  DOT,        DIV
+    PLUS,   MINUS,      DOT,        DIV
 };
 
 

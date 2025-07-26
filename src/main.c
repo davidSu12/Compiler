@@ -18,7 +18,7 @@ int main(int argc, char ** argv){
 
     initBuffer();
     initParser();
-    expr();
+    parse();
     return 0;
 }
 
