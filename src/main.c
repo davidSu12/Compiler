@@ -17,6 +17,7 @@ void ParserBadCasesTest();
 int main(int argc, char ** argv){
 
 
+    printf("Numero terminales:%d\nNum variables:%d\n", NUM_TERMINALS, NUM_VARIABLES);
 #ifdef TEST_PARSER
     testParser();
 #endif

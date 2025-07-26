@@ -26,10 +26,22 @@
 
 
 enum labelTok{
-    NUM,    LEFTPAR,    RIGHTPAR,
-    PLUS,   MINUS,      DOT,        DIV
+    NUM,
+    LEFTPAR,
+    RIGHTPAR,
+    PLUS,
+    MINUS,
+    DOT,
+    DIV,
+    EXPR,
+    EXPRP,
+    TERM,
+    TERMP,
+    FACTOR
 };
 
+#define NUM_TERMINALS (DIV - NUM + 1)
+#define NUM_VARIABLES (FACTOR - EXPR + 1)
 
 typedef struct node{
     union{
