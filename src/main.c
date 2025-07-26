@@ -2,9 +2,11 @@
 #include "lexer.h"
 
 #define TOP_DOWN_PR
-
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
+#endif
+#ifdef TOP_DOWN_IT
+#include "parser/LL/iterative/parser.h"
 #endif
 
 
