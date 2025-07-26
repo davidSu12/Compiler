@@ -11,7 +11,8 @@
 
 
 void test();
-void testParser();
+void ParserGoodCasesTest();
+void ParserBadCasesTest();
 
 int main(int argc, char ** argv){
 
@@ -23,6 +24,55 @@ int main(int argc, char ** argv){
 }
 
 
+
+void ParserBadCasesTest(){
+#ifdef TEST_PARSER
+    initBufferString("1++2");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("((1+2)");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("1+2)");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("(3*)4");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("5+");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("*3+2");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("((2+3)*(4-))");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("()");
+initParser();
+assert(!parse());
+deleteListToken();
+
+initBufferString("");
+initParser();
+assert(!parse());
+deleteListToken();
+#endif
+}
 
 void testParser(){
 #ifdef TEST_PARSER
