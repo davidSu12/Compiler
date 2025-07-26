@@ -16,13 +16,63 @@ void testParser();
 int main(int argc, char ** argv){
 
 
-    initBuffer();
-    initParser();
-    parse();
+#ifdef TEST_PARSER
+    testParser();
+#endif
     return 0;
 }
 
 
+
+void testParser(){
+#ifdef TEST_PARSER
+    initBufferString("1+2*3");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("(1+2)*3");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("((1+1)*3+4*5-8)");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("((2+3)*(4-2))/2");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("6/3+4*(2+1)");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("((10-5)*(3+2))-4");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("((2+3)+((4*5)/2))");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("1+(2*(3+(4*(5+6))))");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+    initBufferString("(((((1+2))))+3)");
+    initParser();
+    assert(parse());
+    deleteListToken();
+
+#endif
+};
 void test(){
 
 #ifdef DEBUG

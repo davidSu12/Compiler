@@ -48,6 +48,7 @@ typedef token ListToken;
 
 //auxFunc
 void initBuffer();
+void initBufferString();
 void printBuffer();
 
 

@@ -17,6 +17,12 @@ void initBuffer(){
     lexemeBegin = currPosition = buff;
 }
 
+void initBufferString(char *str){
+    memset(buff, (char)END, MAX_LEN_BUFF);
+    strcpy(buff, str);
+    lexemeBegin = currPosition = buff;
+}
+
 void printBuffer(){
     printf("%s",buff);
 }
