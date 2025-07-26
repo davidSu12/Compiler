@@ -13,8 +13,17 @@ typedef struct production{
     int longitud_body;
 }production;
 
-
+/**
+ * @param head is the head of the production
+ * @param body is an array that is equal to the body of the production
+ * @param longitud_array is the length of body
+ * @return a node pointing to a production containing all the necessary info
+ */
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
+
+/**
+ * inits the parse table
+ */
 void initParseTable(void);
 
 

@@ -3,6 +3,9 @@
 
 static production * parseTable[NUM_TERMINALS][NUM_VARIABLES];
 
+
+
+
 production * createProduction(enum labelTok head, enum labelTok body[], int longitud_array){
 
     production * temp = malloc(sizeof(struct production));
@@ -22,6 +25,7 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
     for(int i = 0; i < longitud_array; i++){
         temp -> body[i] = body[i];
     }
+    temp -> longitud_body = longitud_array;
     return temp;
 
     return NULL;

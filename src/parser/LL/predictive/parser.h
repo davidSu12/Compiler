@@ -6,7 +6,9 @@
 
 
 
-
+/**
+ * @return true if the parse goes right
+ */
 bool parse(void);
 void expr(void); //this is my first symbol
 void exprP(void);
