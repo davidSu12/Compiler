@@ -7,29 +7,15 @@
 //num_variables = 5
 //num_terminals = 7
 
-/*
- * enum labelTok{
-    NUM,
-    LEFTPAR,
-    RIGHTPAR,
-    PLUS,
-    MINUS,
-    DOT,
-    DIV,
-    EXPR,
-    EXPRP,
-    TERM,
-    TERMP,
-    FACTOR
-};
+typedef struct production{
+    enum labelTok head;
+    enum labelTok * body;
+    int longitud_body;
+}production;
 
- */
 
-/*
-static enum labelTok parsinTable[NUM_VARIABLES][NUM_TERMINALS] =
-        {
-                {},{},
+production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
+void initParseTable(void);
 
-};
-*/
+
 #endif
