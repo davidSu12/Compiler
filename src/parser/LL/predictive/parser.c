@@ -36,6 +36,8 @@ void exprP(void){
         match(MINUS);
         term();
         exprP();
+    }else if(lookahead != NULL){
+        SyntaxError();
     }else{
         //we are in the empty string
         return;
@@ -65,8 +67,9 @@ void termP(void){
         match(DIV);
         factor();
         termP();
+    }else if(lookahead != NULL){
+        SyntaxError();
     }else{
-        //we are in the empty string
         return;
     }
 
@@ -83,6 +86,7 @@ void factor(void){
         printf("%s\n",lookahead->element.lexeme);
 #endif
         match(NUM);
+
     }else if(lookahead -> label == LEFTPAR){
         match(LEFTPAR);
         expr();
