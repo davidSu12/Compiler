@@ -16,6 +16,7 @@ int main(int argc, char ** argv){
 
 
     initBuffer();
+    initParser();
     expr();
     return 0;
 }

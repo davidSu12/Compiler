@@ -12,8 +12,7 @@ void term();
 void termP();
 void factor();
 void match(enum labelTok simbolo);
-
-
+void initParser();
 
 
 #endif PARSER_H

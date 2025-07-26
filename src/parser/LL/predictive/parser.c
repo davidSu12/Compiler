@@ -1,15 +1,30 @@
 #include "parser.h"
 
+
 static token lookahead;
 
 
-void expr(){
-    lookahead = getNextToken();
-    term();
-    exprP();
+/**
+ * auxiliar function to raise a syntax error
+ */
+static void SyntaxError(void) {
+    fprintf(stderr, "Syntax error\n");
+    exit(EXIT_FAILURE);
 
 }
-void exprP(){
+void initParser(){
+    lookahead = getNextToken();
+}
+void expr(void){
+#ifdef DEBUG
+    fprintf(stdout, "expr()\n");
+#endif
+    term();exprP();
+}
+void exprP(void){
+#ifdef DEBUG
+    fprintf(stdout, "exprP()\n");
+#endif
     if(lookahead == NULL){
         return;
     }
@@ -22,44 +37,79 @@ void exprP(){
         term();
         exprP();
     }else{
+        //we are in the empty string
         return;
     }
 
 }
-void term(){
+void term(void){
+#ifdef DEBUG
+    fprintf(stdout, "term()\n");
+#endif
     factor();
     termP();
 
 }
-void termP(){
+void termP(void){
+#ifdef DEBUG
+    fprintf(stdout, "termP()\n");
+#endif
     if(lookahead == NULL){
         return;
     }
     if(lookahead -> label == DOT){
+        match(DOT);
         factor();
         termP();
     }else if(lookahead -> label == DIV){
+        match(DIV);
         factor();
         termP();
     }else{
+        //we are in the empty string
         return;
     }
+
 }
-void factor(){
+void factor(void){
+#ifdef DEBUG
+    fprintf(stdout, "factor()\n");
+#endif
+    if(lookahead == NULL){
+        return;
+    }
     if(lookahead -> label == NUM){
-        lookahead = getNextToken();
-    }else{
+#ifdef DEBUG
+        printf("%s\n",lookahead->element.lexeme);
+#endif
+        match(NUM);
+    }else if(lookahead -> label == LEFTPAR){
         match(LEFTPAR);
         expr();
         match(RIGHTPAR);
-    }
-}
-void match(enum labelTok tok){
-
-    if(tok != lookahead -> label){
-        fprintf(stderr, "Syntax error. Aborting compilation\n");
-        exit(EXIT_FAILURE);
     }else{
-        lookahead = getNextToken();
+
+#ifdef DEBUG
+        fprintf(stderr, "Error in factor\n");
+        fprintf(stderr, "%c\n", simbToChar(lookahead -> label));
+#endif
+        SyntaxError();
     }
 }
+void match(enum labelTok simbolo){
+    if(lookahead == NULL){
+        SyntaxError();
+    }
+#ifdef DEBUG
+    fprintf(stdout, "match()\n");
+#endif
+    if(lookahead -> label == simbolo){
+        lookahead = getNextToken();
+    }else{
+#ifdef DEBUG
+        fprintf(stderr, "Error in factor");
+#endif
+        SyntaxError();
+    }
+}
+
