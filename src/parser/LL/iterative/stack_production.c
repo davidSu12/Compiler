@@ -5,7 +5,7 @@
 static stackProduction stackProd = NULL;
 
 
-static bool pushLabel(enum labelTok label){
+bool pushLabel(enum labelTok label){
     nodeProduction * temp = malloc(sizeof(struct nodeProduction));
     if(!temp){
         fprintf(stderr, "An error has ocurred while"

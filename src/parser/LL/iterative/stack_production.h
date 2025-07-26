@@ -32,4 +32,12 @@ bool isEmptyStack();
  */
 void popLabel();
 
+/**
+ *
+ * @param label label to push on the stack
+ * @return returns true if everything goes right, else otherwise
+ */
+bool pushLabel(enum labelTok label);
+
+
 #endif

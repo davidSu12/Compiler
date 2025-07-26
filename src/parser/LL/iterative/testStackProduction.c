@@ -1,6 +1,6 @@
 #include "testStackProduction.h"
 
-void test(void){
+void testInsertion(void){
 
     production *temp = createProduction(EXPRP,
                                         (enum labelTok []){PLUS, TERM, EXPRP},

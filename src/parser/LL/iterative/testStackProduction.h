@@ -3,5 +3,5 @@
 
 #include "stack_production.h"
 
-void test(void);
+void testInsertion(void);
 #endif
