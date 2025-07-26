@@ -4,4 +4,5 @@
 #include "stack_production.h"
 
 void testInsertion(void);
+void testPop(void);
 #endif

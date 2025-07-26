@@ -14,7 +14,7 @@
 
 int main(int argc, char ** argv){
 
-    testInsertion();
 
+    testPop();
     return 0;
 }
