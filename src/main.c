@@ -1,16 +1,27 @@
 #include <stdio.h>
 #include "lexer.h"
 
-#define DEBUG
+#define TOP_DOWN_PR
+
+#ifdef TOP_DOWN_PR
+#include "parser/LL/predictive/parser.h"
+#endif
+
+
+void test();
 
 int main(int argc, char ** argv){
 
+    return 0;
+}
+
+
+void test(){
+
+#ifdef DEBUG
     token m;
     initBuffer();
 
-
-
-#ifdef DEBUG
     while((m = getNextToken()) != NULL){
         if(m -> label == NUM){
 
@@ -20,8 +31,7 @@ int main(int argc, char ** argv){
             printf("%c\n", simbToChar(m ->element.simb));
         }
     }
+    deleteListToken();
 #endif
 
-    deleteListToken();
-    return 0;
 }

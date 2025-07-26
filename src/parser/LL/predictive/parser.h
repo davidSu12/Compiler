@@ -1,8 +1,19 @@
-//
-// Created by sam_s on 26/07/2025.
-//
+#ifndef PARSER_H
+#define PARSER_H
 
-#ifndef COMPILERIMP_PARSER_H
-#define COMPILERIMP_PARSER_H
+#define LEXER_INCLUDE_PATH "../../../lexer.h"
+#include LEXER_INCLUDE_PATH
 
-#endif //COMPILERIMP_PARSER_H
+
+
+void expr(); //this is my first symbol
+void exprP();
+void term();
+void termP();
+void factor();
+void match(enum labelTok simbolo);
+
+
+
+
+#endif PARSER_H
