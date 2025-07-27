@@ -66,3 +66,26 @@ void printListLabel(listLabel t){
     }
     printf("\n");
 }
+
+listLabel * unionList(listLabel *l1, listLabel *l2){
+    positionLabel temp = *l1;
+    if(isEmptyListLabel(*l1)){
+        *l1 = *l2;
+        return l1;
+    }
+    for(; temp -> next != NULL; temp = temp -> next);
+    temp -> next = *l2;
+    return l2;
+}
+
+void deleteLabelList(listLabel *l1){
+    positionLabel temp = *l1;
+    if(isEmptyListLabel(*l1)){
+        return;
+    }
+    do{
+        *l1 = (*l1) -> next;
+        free(temp);
+        temp = *l1;
+    }while(*l1 != NULL);
+}

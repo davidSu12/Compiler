@@ -24,5 +24,6 @@ bool insertLabel(enum labelTok label, listLabel * list);
 void deleteLabel(enum labelTok label, listLabel * list);
 positionLabel searchLabel(enum labelTok label, listLabel list);
 void printListLabel(listLabel t);
-
+listLabel *unionList(listLabel *l1, listLabel *l2);
+void deleteLabelList(listLabel *l1);
 #endif
