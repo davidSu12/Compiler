@@ -116,6 +116,8 @@ static void auxFirst(enum labelTok head, listLabel *t){
     }
 }
 
+
+
 static void auxFollow(enum labelTok head, listLabel *t){
     int i = 0;
     if(head == EXPR){
@@ -124,8 +126,8 @@ static void auxFollow(enum labelTok head, listLabel *t){
                             "inserting label in t");
             return;
         }
-    }else{
-        while(listProduction[i].head != EMPTY){
+    }
+    while(listProduction[i].head != EMPTY){
             for(int j = 0; j < listProduction[i].longitud_body; j++){
                 if(listProduction[i].body[j] == head){
                     //caso1
@@ -143,8 +145,8 @@ static void auxFollow(enum labelTok head, listLabel *t){
                 }
             }
             i++;
-        }
     }
+
 }
 listLabel first(enum labelTok head){
     listLabel t;
