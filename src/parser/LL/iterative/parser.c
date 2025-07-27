@@ -118,6 +118,33 @@ static void auxFirst(enum labelTok head, listLabel *t){
 
 static void auxFollow(enum labelTok head, listLabel *t){
     int i = 0;
+    if(head == EXPR){
+        if(!insertLabel($, t)){
+            fprintf(stderr, "An error has ocurred while "
+                            "inserting label in t");
+            return;
+        }
+    }else{
+        while(listProduction[i].head != EMPTY){
+            for(int j = 0; j < listProduction[i].longitud_body; j++){
+                if(listProduction[i].body[j] == head){
+                    //caso1
+                    if(j < listProduction[i].longitud_body){
+                        //head no esta en el final del body
+                        listLabel temp = first(listProduction[i].body[j+1]);
+                        unionList(t, &temp);
+                        break;
+                    }else{ //caso2
+                        listLabel temp = follow(listProduction[i].head);
+                        unionList(t, &temp);
+                        break;
+                    }
+
+                }
+            }
+            i++;
+        }
+    }
 }
 listLabel first(enum labelTok head){
     listLabel t;

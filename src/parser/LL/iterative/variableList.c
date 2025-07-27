@@ -69,13 +69,15 @@ void printListLabel(listLabel t){
 
 listLabel * unionList(listLabel *l1, listLabel *l2){
     positionLabel temp = *l1;
+
     if(isEmptyListLabel(*l1)){
         *l1 = *l2;
-        return l1;
+    }else{
+        for(; temp -> next != NULL; temp = temp -> next);
+        temp -> next = *l2;
     }
-    for(; temp -> next != NULL; temp = temp -> next);
-    temp -> next = *l2;
-    return l2;
+
+    return l1;
 }
 
 void deleteLabelList(listLabel *l1){
@@ -88,4 +90,5 @@ void deleteLabelList(listLabel *l1){
         free(temp);
         temp = *l1;
     }while(*l1 != NULL);
+    assert(*l1 == NULL);
 }

@@ -38,7 +38,8 @@ enum labelTok{
     TERM,
     TERMP,
     FACTOR,
-    EMPTY
+    EMPTY,
+    $
 };
 
 #define NUM_TERMINALS (DIV - NUM + 1)
