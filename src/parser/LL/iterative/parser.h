@@ -7,12 +7,21 @@
 //num_variables = 5
 //num_terminals = 7
 
+enum TypeEntry{ERROR, NORMAL};
+
 typedef struct production{
     enum labelTok head;
     enum labelTok * body;
     int longitud_body;
 }production;
 
+typedef struct entryTable{
+    enum TypeEntry tipoEntrada;
+    union element{
+        production prod;
+        void (*error_func)(void);
+    };
+}entryTable;
 /**
  * @param head is the head of the production
  * @param body is an array that is equal to the body of the production
@@ -20,11 +29,5 @@ typedef struct production{
  * @return a node pointing to a production containing all the necessary info
  */
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
-
-/**
- * inits the parse table
- */
-void initParseTable(void);
-
 
 #endif
