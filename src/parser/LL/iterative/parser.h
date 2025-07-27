@@ -26,6 +26,8 @@ typedef struct entryTable{
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
 listLabel first(enum labelTok head);
 bool derivesEmptyString(enum labelTok head);
+listLabel follow(enum labelTok head);
+
 
 
 #endif

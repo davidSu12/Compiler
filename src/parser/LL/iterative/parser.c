@@ -116,9 +116,20 @@ static void auxFirst(enum labelTok head, listLabel *t){
     }
 }
 
+static void auxFollow(enum labelTok head, listLabel *t){
+    int i = 0;
+}
 listLabel first(enum labelTok head){
     listLabel t;
     createEmptyListLabel(&t);
     auxFirst(head, &t);
     return t;
+}
+
+listLabel follow(enum labelTok head){
+    listLabel t;
+    createEmptyListLabel(&t);
+    auxFollow(head, &t);
+    return t;
+
 }
