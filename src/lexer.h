@@ -37,11 +37,14 @@ enum labelTok{
     EXPRP,
     TERM,
     TERMP,
-    FACTOR
+    FACTOR,
+    EMPTY
 };
 
 #define NUM_TERMINALS (DIV - NUM + 1)
 #define NUM_VARIABLES (FACTOR - EXPR + 1)
+#define IS_TERMINAL(s) (s <= DIV)
+#define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
 
 typedef struct node{
     union{
@@ -58,24 +61,49 @@ typedef struct node * token;
 typedef token ListToken;
 
 
-//auxFunc
+/**
+ * inits the buffer from stdin
+ */
 void initBuffer();
-void initBufferString();
+
+/**
+ * inits the buffer with str
+ * @param str
+ */
+void initBufferString(char *str);
+
+/**
+ * auxiliar function just to se the buffer
+ * @deprecated
+ */
 void printBuffer();
 
 
-char simbToChar(enum labelTok);
+/**
+ * corresponding char for item
+ * @param item
+ * @return the corresponding char for item
+ */
+char simbToChar(enum labelTok item);
 
 
-//getNextToken -> token
-/*This function returns the next token on the input and returns NULL if there is no more input
-*/
-token getNextToken();
+/**
+ * function tha returns the next token in the buffer
+ * @return the next token from the buffer
+ */
+token getNextToken(void);
 
 
+/**
+ * delete the corresponfing list for token
+ */
+void deleteListToken(void);
 
-//a few functions just to work on the token list
-void deleteListToken();
-bool isEmptyList();
+
+/**
+ * finds out if the list of tokens is empty
+ * @return true if the list of tokens is empty false otherwise
+ */
+bool isEmptyList(void);
 
 #endif //LEXER_H
