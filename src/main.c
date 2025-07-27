@@ -12,11 +12,8 @@
 #endif
 
 
-#define TEST(s) (assert(s == 0))
-
 int main(int argc, char ** argv){
 
-    TEST(NUM);
-
+    listLabel l = first(EXPR);
     return 0;
 }

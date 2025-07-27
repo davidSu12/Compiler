@@ -1,14 +1,27 @@
 #include "parser.h"
 
 
+#define DEBUG
+
 #define VARIABLE_INDEX(s) (s - EXPR)
 #define TERMINAL_INDEX(s) (s)
 
 
-static entryTable parseTable[NUM_VARIABLES][NUM_TERMINALS] = {
-        [VARIABLE_INDEX(EXPR)][TERMINAL_INDEX(NUM)] = {},
-
+production listProduction[] = {
+        {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
+        {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
+        {EXPRP, (enum labelTok[]){MINUS, TERM, EXPRP}, 3},
+        {EXPRP, NULL, 0},
+        {TERM, (enum labelTok[]){FACTOR, TERMP}, 2},
+        {TERMP, (enum labelTok[]){DOT, FACTOR, TERMP}, 3},
+        {TERMP, (enum labelTok[]){DIV, FACTOR, TERMP}, 3},
+        {TERMP, NULL, 0},
+        {FACTOR, (enum labelTok[]){NUM},1},
+        {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3},
+        {EMPTY, NULL, 0} //final de production
 };
+
+
 
 static void SyntaxError(){
     fprintf(stderr, "An error has ocurred\n");
@@ -61,11 +74,20 @@ bool derivesEmptyString(enum labelTok head){
 }
 
 static void auxFirst(enum labelTok head, listLabel *t){
+
+#ifdef DEBUG
+    if(head == EXPR){
+        printf("Estoy en expr\n");
+    }
+    printListLabel(*t);
+#endif
+
     if(IS_TERMINAL(head)){
         if(!insertLabel(head, t)){
             fprintf(stderr, "An error has ocurred while inserting label in auxFirst\n");
             exit(EXIT_FAILURE);
         }
+        return;
     }else{
         int i = 0;
         while(listProduction[i].head != EMPTY){
