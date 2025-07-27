@@ -54,3 +54,12 @@ positionLabel searchLabel(enum labelTok label, listLabel list){
     return temp;
 
 }
+
+void printListLabel(listLabel t){
+    positionLabel temp = t;
+    while(temp != NULL){
+        printf("%d ", temp -> item);
+        temp = temp -> next;
+    }
+    printf("\n");
+}

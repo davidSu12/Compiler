@@ -23,6 +23,6 @@ bool isEmptyListLabel(listLabel list);
 bool insertLabel(enum labelTok label, listLabel * list);
 void deleteLabel(enum labelTok label, listLabel * list);
 positionLabel searchLabel(enum labelTok label, listLabel list);
-
+void printListLabel(listLabel t);
 
 #endif
