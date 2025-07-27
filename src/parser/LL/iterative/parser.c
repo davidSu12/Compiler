@@ -4,18 +4,6 @@
 #define VARIABLE_INDEX(s) (s - EXPR)
 #define TERMINAL_INDEX(s) (s)
 
-static production listProduction[] = {
-        {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
-        {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
-        {EXPRP, (enum labelTok[]){MINUS, TERM, EXPRP}, 3},
-        {EXPRP, NULL, 0},
-        {TERM, (enum labelTok[]){FACTOR, TERMP}, 2},
-        {TERMP, (enum labelTok[]){DOT, FACTOR, TERMP}, 3},
-        {TERMP, (enum labelTok[]){DIV, FACTOR, TERMP}, 3},
-        {TERMP, NULL, 0},
-        {FACTOR, (enum labelTok[]){NUM},1},
-        {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3}
-};
 
 static entryTable parseTable[NUM_VARIABLES][NUM_TERMINALS] = {
         [VARIABLE_INDEX(EXPR)][TERMINAL_INDEX(NUM)] = {},
@@ -51,4 +39,61 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
     }
     temp -> longitud_body = longitud_array;
     return temp;
+}
+
+
+bool derivesEmptyString(enum labelTok head){
+    if(IS_TERMINAL(head)){
+        return false;
+    }else{
+        int i = 0;
+        while(listProduction[i].head != EMPTY){
+            if(listProduction[i].head == head){
+                //longitud_body == 0 -> body = emptyString
+                if(listProduction[i].longitud_body == 0){
+                    return true;
+                }
+            }
+            i++;
+        }
+        return false;
+    }
+}
+
+static void auxFirst(enum labelTok head, listLabel *t){
+    if(IS_TERMINAL(head)){
+        if(!insertLabel(head, t)){
+            fprintf(stderr, "An error has ocurred while inserting label in auxFirst\n");
+            exit(EXIT_FAILURE);
+        }
+    }else{
+        int i = 0;
+        while(listProduction[i].head != EMPTY){
+            if(listProduction[i].head == head){
+                //estamos ante la produccion que buscabamos
+                if(listProduction[i].longitud_body == 0){
+                    //estamos ante la cadena vacia
+                    insertLabel(EMPTY, t);
+                }else{
+                    //no estamos ante la cadena vacia
+                    for(int j = 0; j < listProduction[i].longitud_body; j++){
+                        auxFirst(listProduction[i].body[j], t);
+                        if(derivesEmptyString(listProduction[i].body[j])){
+                            goto endWhile;
+                        }
+                    }
+
+                }
+            }
+            i++;
+        }
+        endWhile:
+    }
+}
+
+listLabel first(enum labelTok head){
+    listLabel t;
+    createEmptyListLabel(&t);
+    auxFirst(head, &t);
+    return t;
 }

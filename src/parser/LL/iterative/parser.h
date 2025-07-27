@@ -3,9 +3,8 @@
 
 #define LEXER_INCLUDE_PATH "../../../lexer.h"
 #include LEXER_INCLUDE_PATH
+#include "variableList.h"
 
-//num_variables = 5
-//num_terminals = 7
 
 enum TypeEntry{ERROR, NORMAL};
 
@@ -22,12 +21,28 @@ typedef struct entryTable{
         void (*error_func)(void);
     };
 }entryTable;
-/**
- * @param head is the head of the production
- * @param body is an array that is equal to the body of the production
- * @param longitud_array is the length of body
- * @return a node pointing to a production containing all the necessary info
- */
+
+
+production listProduction[] = {
+        {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
+        {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
+        {EXPRP, (enum labelTok[]){MINUS, TERM, EXPRP}, 3},
+        {EXPRP, NULL, 0},
+        {TERM, (enum labelTok[]){FACTOR, TERMP}, 2},
+        {TERMP, (enum labelTok[]){DOT, FACTOR, TERMP}, 3},
+        {TERMP, (enum labelTok[]){DIV, FACTOR, TERMP}, 3},
+        {TERMP, NULL, 0},
+        {FACTOR, (enum labelTok[]){NUM},1},
+        {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3},
+        {EMPTY, NULL, 0} //final de production
+};
+
+
+
+
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
+listLabel first(enum labelTok head);
+bool derivesEmptyString(enum labelTok head);
+
 
 #endif
