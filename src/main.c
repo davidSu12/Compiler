@@ -12,9 +12,11 @@
 #endif
 
 
+#define TEST(s) (assert(s == 0))
+
 int main(int argc, char ** argv){
 
+    TEST(NUM);
 
-    testPop();
     return 0;
 }

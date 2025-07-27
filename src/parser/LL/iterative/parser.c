@@ -1,7 +1,8 @@
 #include "parser.h"
 
 
-static entryTable * parseTable[NUM_VARIABLES][NUM_TERMINALS];
+#define VARIABLE_INDEX(s) (s - EXPR)
+#define TERMINAL_INDEX(s) (s)
 
 static production listProduction[] = {
         {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
@@ -15,6 +16,16 @@ static production listProduction[] = {
         {FACTOR, (enum labelTok[]){NUM},1},
         {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3}
 };
+
+static entryTable parseTable[NUM_VARIABLES][NUM_TERMINALS] = {
+        [VARIABLE_INDEX(EXPR)][TERMINAL_INDEX(NUM)] = {},
+
+};
+
+static void SyntaxError(){
+    fprintf(stderr, "An error has ocurred\n");
+    exit(EXIT_FAILURE);
+}
 
 production * createProduction(enum labelTok head, enum labelTok body[], int longitud_array){
 
