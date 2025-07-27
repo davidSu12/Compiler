@@ -79,7 +79,7 @@ static void auxFirst(enum labelTok head, listLabel *t){
                     for(int j = 0; j < listProduction[i].longitud_body; j++){
                         auxFirst(listProduction[i].body[j], t);
                         if(derivesEmptyString(listProduction[i].body[j])){
-                            goto endWhile;
+                            break;
                         }
                     }
 
@@ -87,7 +87,6 @@ static void auxFirst(enum labelTok head, listLabel *t){
             }
             i++;
         }
-        endWhile:
     }
 }
 
