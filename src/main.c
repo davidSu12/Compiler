@@ -14,6 +14,8 @@
 
 int main(int argc, char ** argv){
 
-    listLabel l = first(EXPR);
+    listLabel l = first(EXPRP);
+    assert(!derivesEmptyString(LEFTPAR));
+    printListLabel(l);
     return 0;
 }

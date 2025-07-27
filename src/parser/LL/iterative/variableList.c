@@ -57,6 +57,9 @@ positionLabel searchLabel(enum labelTok label, listLabel list){
 
 void printListLabel(listLabel t){
     positionLabel temp = t;
+    if(temp == NULL){
+        fprintf(stderr, "List is empty\n");
+    }
     while(temp != NULL){
         printf("%d ", temp -> item);
         temp = temp -> next;

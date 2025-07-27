@@ -1,10 +1,10 @@
 #include "parser.h"
 
 
-#define DEBUG
 
 #define VARIABLE_INDEX(s) (s - EXPR)
 #define TERMINAL_INDEX(s) (s)
+
 
 
 production listProduction[] = {
@@ -76,21 +76,23 @@ bool derivesEmptyString(enum labelTok head){
 static void auxFirst(enum labelTok head, listLabel *t){
 
 #ifdef DEBUG
-    if(head == EXPR){
-        printf("Estoy en expr\n");
-    }
-    printListLabel(*t);
+    printf("\nhead:%d\n", head);
 #endif
-
     if(IS_TERMINAL(head)){
         if(!insertLabel(head, t)){
             fprintf(stderr, "An error has ocurred while inserting label in auxFirst\n");
             exit(EXIT_FAILURE);
         }
+#ifdef DEBUG
+        printf("\ninsertamos: %d\n", head);
+#endif
         return;
     }else{
         int i = 0;
         while(listProduction[i].head != EMPTY){
+#ifdef DEBUG
+            printf("\ni:%d\n",i);
+#endif
             if(listProduction[i].head == head){
                 //estamos ante la produccion que buscabamos
                 if(listProduction[i].longitud_body == 0){
@@ -99,8 +101,10 @@ static void auxFirst(enum labelTok head, listLabel *t){
                 }else{
                     //no estamos ante la cadena vacia
                     for(int j = 0; j < listProduction[i].longitud_body; j++){
+
                         auxFirst(listProduction[i].body[j], t);
-                        if(derivesEmptyString(listProduction[i].body[j])){
+
+                        if(!derivesEmptyString(listProduction[i].body[j])){
                             break;
                         }
                     }
