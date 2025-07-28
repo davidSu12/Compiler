@@ -15,7 +15,7 @@
 int main(int argc, char ** argv){
 
 
-    setLabel f = first(EXPR);
+    setLabel f = follow(EXPR);
     printSetLabel(f);
     return 0;
 }

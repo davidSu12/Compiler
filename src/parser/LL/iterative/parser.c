@@ -136,9 +136,14 @@ static void auxFollow(enum labelTok head, setLabel *t){
                     //caso1
                     if(j < listProduction[i].longitud_body-1){
 
-                        //TODO: NOS FALTA CONSIDERAR EL ULTIMO CASO AQUI
-                        //head no esta en el final del body
+                        //tenemos que considerar todas las reglas aqui
                         setLabel temp = first(listProduction[i].body[j+1]);
+                        if(searchLabel(EMPTY, temp)){
+                            setLabel temp1 = follow(listProduction[i].head);
+                            unionSet(t, &temp1);
+                        }
+                        //aqui no añadimos empty
+                        temp[EMPTY] = false;
                         unionSet(t, &temp);
                         break;
                     }else{ //caso2

@@ -46,7 +46,7 @@ enum labelTok{
 #define NUM_VARIABLES (FACTOR - EXPR + 1)
 #define IS_TERMINAL(s) (s <= DIV)
 #define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
-#define LAST_VARIABLE $
+#define LAST_VARIABLE ($+1)
 
 typedef struct node{
     union{
