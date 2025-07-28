@@ -15,15 +15,17 @@
 #define ISNULLTOKEN(s) (s == LNULL)
 #define NOTSTRING false
 #define STRING true
-
-/*
- * Por una parte definimos los token para los
- * cuales necesitamos guardar algun tipo de informacion
- * por otro guardamos los token simbolicos sobre
- * los cuales tenemos que saber unicamente
- * la clase de simbolo que nos encontramos ¡
- */
-
+#define NUM_TERMINALS (DIV - NUM + 1)
+#define NUM_VARIABLES (FACTOR - EXPR + 1)
+#define IS_TERMINAL(s) (s <= DIV)
+#define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
+#define LAST_VARIABLE ($+1)
+#define FIRST_TERMINAL NUM
+#define LAST_TERMINAL DIV
+#define FIRST_NONTERMINAL EXPR
+#define LAST_NONTERMINAL FACTOR
+#define VARIABLE_INDEX(s) (s - EXPR)
+#define TERMINAL_INDEX(s) (s)
 
 enum labelTok{
     NUM,
@@ -41,18 +43,6 @@ enum labelTok{
     EMPTY,
     $
 };
-
-#define NUM_TERMINALS (DIV - NUM + 1)
-#define NUM_VARIABLES (FACTOR - EXPR + 1)
-#define IS_TERMINAL(s) (s <= DIV)
-#define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
-#define LAST_VARIABLE ($+1)
-#define FIRST_TERMINAL NUM
-#define LAST_TERMINAL DIV
-#define FIRST_NONTERMINAL EXPR
-#define LAST_NONTERMINAL FACTOR
-
-//tenemos que considerar el caso cuando nos encontramos an
 
 
 typedef struct node{
@@ -86,7 +76,6 @@ void initBufferString(char *str);
  * @deprecated
  */
 void printBuffer();
-
 
 /**
  * corresponding char for item

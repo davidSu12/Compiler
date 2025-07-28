@@ -1,13 +1,6 @@
 #include "parser.h"
 
 
-
-#define VARIABLE_INDEX(s) (s - EXPR)
-#define TERMINAL_INDEX(s) (s)
-
-
-
-
 production listProduction[] = {
         {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
         {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
