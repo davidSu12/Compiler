@@ -41,7 +41,7 @@ void printSetLabel(setLabel t){
 }
 setLabel *unionSet(setLabel *set1, setLabel *set2){
     if(isEmptySetLabel(*set1)){
-        return set2;
+        set1 = set2;
     }else{
         for(int i = 0; i < MAX_LEN_SET; i++){
             if(!(*set1)[i]){
@@ -49,8 +49,8 @@ setLabel *unionSet(setLabel *set1, setLabel *set2){
             }
         }
         deleteLabelSet(set2);
-        return set1;
     }
+    return set1;
 }
 void deleteLabelSet(setLabel *set){
     free(*set);

@@ -22,6 +22,8 @@ production listProduction[] = {
         {EMPTY, NULL, 0} //final de production
 };
 
+production parseTable[NUM_VARIABLES][NUM_TERMINALS];
+
 
 
 static void SyntaxError(){
@@ -109,7 +111,6 @@ static void auxFirst(enum labelTok head, setLabel *t){
                             break;
                         }
                     }
-
                 }
             }
             i++;
@@ -169,6 +170,33 @@ setLabel follow(enum labelTok head){
     setLabel t;
     createEmptySetLabel(&t);
     auxFollow(head, &t);
+    return t;
+
+}
+
+void initParseTable(void){
+
+
+    //for(int i = VARIABLE_INDEX(FIRST_NONTERMINAL); i < VARIABLE_INDEX(LAST_NONTERMINAL); i++)
+}
+
+static setLabel auxfirst_production(production p, setLabel *t){
+
+    for(int i = 0; i < p.longitud_body; i++){
+
+        setLabel temp = first(p.body[i]);
+        unionSet(t, &temp);
+        if(!derivesEmptyString(p.body[i])){
+            break;
+        }
+    }
+}
+
+setLabel first_production(production p){
+
+    setLabel t;
+    createEmptySetLabel(&t);
+    auxfirst_production(p, &t);
     return t;
 
 }

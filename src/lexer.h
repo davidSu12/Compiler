@@ -47,6 +47,13 @@ enum labelTok{
 #define IS_TERMINAL(s) (s <= DIV)
 #define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
 #define LAST_VARIABLE ($+1)
+#define FIRST_TERMINAL NUM
+#define LAST_TERMINAL DIV
+#define FIRST_NONTERMINAL EXPR
+#define LAST_NONTERMINAL FACTOR
+
+//tenemos que considerar el caso cuando nos encontramos an
+
 
 typedef struct node{
     union{

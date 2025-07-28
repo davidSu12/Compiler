@@ -27,6 +27,8 @@ production *createProduction(enum labelTok head, enum labelTok body[], int longi
 setLabel first(enum labelTok head);
 bool derivesEmptyString(enum labelTok head);
 setLabel follow(enum labelTok head);
+void initParseTable(void);
+setLabel first_production(production p);
 
 
 

@@ -25,7 +25,8 @@
 
 int main(int argc, char ** argv){
 
-
+    printf("%d", FIRST_NONTERMINAL);
+    printf("%d", LAST_NONTERMINAL);
 
     return 0;
 }
