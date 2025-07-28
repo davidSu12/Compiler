@@ -47,12 +47,13 @@ void test2Follow(void){
     }
     deleteLabelSet(&t);
 }
+
 void test3Follow(void){
     setLabel t = follow(LEFTPAR);
     for(int i = 0; i < MAX_LEN_SET; i++){
         switch(i){
             case NUM:
-            case EXPR:
+            case LEFTPAR:
                 assert(t[i]);
                 break;
             default:
@@ -69,14 +70,15 @@ void test3Follow(void){
             case PLUS:
             case MINUS:
             case DOT:
+            case DIV:
+            case $:
+                assert(t[i]);
+                break;
+            default:
+                assert(!t[i]);
 
         }
     }
-
-}
-void test4Follow(void){
-
-}
-void test5Follow(void){
+    deleteLabelSet(&t);
 
 }

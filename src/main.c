@@ -26,9 +26,6 @@
 int main(int argc, char ** argv){
 
 
-    setLabel t = follow(RIGHTPAR);
-    printSetLabel(t);
-
 
     return 0;
 }
