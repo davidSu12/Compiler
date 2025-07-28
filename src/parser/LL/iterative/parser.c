@@ -6,6 +6,8 @@
 #define TERMINAL_INDEX(s) (s)
 
 
+//TODO: pending to optimize follow.
+
 
 production listProduction[] = {
         {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
@@ -131,15 +133,19 @@ static void auxFollow(enum labelTok head, listLabel *t){
             for(int j = 0; j < listProduction[i].longitud_body; j++){
                 if(listProduction[i].body[j] == head){
                     //caso1
-                    if(j < listProduction[i].longitud_body){
+                    if(j < listProduction[i].longitud_body-1){
+
+                        //TODO: NOS FALTA CONSIDERAR EL ULTIMO CASO AQUI
                         //head no esta en el final del body
                         listLabel temp = first(listProduction[i].body[j+1]);
                         unionList(t, &temp);
                         break;
                     }else{ //caso2
-                        listLabel temp = follow(listProduction[i].head);
-                        unionList(t, &temp);
-                        break;
+                        if(listProduction[i].head != head){
+                            listLabel temp = follow(listProduction[i].head);
+                            unionList(t, &temp);
+                            break;
+                        }
                     }
 
                 }

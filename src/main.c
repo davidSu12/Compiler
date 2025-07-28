@@ -14,7 +14,7 @@
 
 int main(int argc, char ** argv){
 
-    listLabel l = follow(EXPRP);
+    listLabel l = follow(NUM);
     printListLabel(l);
     return 0;
 }
