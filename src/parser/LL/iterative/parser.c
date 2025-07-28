@@ -5,17 +5,17 @@ production listProduction[] = {
         {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
         {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
         {EXPRP, (enum labelTok[]){MINUS, TERM, EXPRP}, 3},
-        {EXPRP, NULL, 0},
+        {EXPRP, (enum labelTok[]){EMPTY}, 1},
         {TERM, (enum labelTok[]){FACTOR, TERMP}, 2},
         {TERMP, (enum labelTok[]){DOT, FACTOR, TERMP}, 3},
         {TERMP, (enum labelTok[]){DIV, FACTOR, TERMP}, 3},
-        {TERMP, NULL, 0},
+        {TERMP, (enum labelTok[]){EMPTY}, 1},
         {FACTOR, (enum labelTok[]){NUM},1},
         {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3},
         {EMPTY, NULL, 0} //final de production
 };
 
-production *parseTable[NUM_VARIABLES][NUM_TERMINALS];
+production *parseTable[NUM_VARIABLES][NUM_TERMINALS] = {NULL};
 
 static void SyntaxError(){
     fprintf(stderr, "An error has ocurred\n");
@@ -57,8 +57,10 @@ bool derivesEmptyString(enum labelTok head){
         while(listProduction[i].head != EMPTY){
             if(listProduction[i].head == head){
                 //longitud_body == 0 -> body = emptyString
-                if(listProduction[i].longitud_body == 0){
-                    return true;
+                if(listProduction[i].longitud_body > 0){
+                    if(listProduction[i].body[0] == EMPTY){
+                        return true;
+                    }
                 }
             }
             i++;
@@ -89,7 +91,7 @@ static void auxFirst(enum labelTok head, setLabel *t){
 #endif
             if(listProduction[i].head == head){
                 //estamos ante la produccion que buscabamos
-                if(listProduction[i].longitud_body == 0){
+                if(listProduction[i].longitud_body == 1 && listProduction[i].body[0]){
                     //estamos ante la cadena vacia
                     addLabel(EMPTY, t);
                 }else{
@@ -165,19 +167,11 @@ setLabel follow(enum labelTok head){
 
 }
 
+
 void initParseTable(void){
-    /*
-    assert(VARIABLE_INDEX(FIRST_NONTERMINAL) == 0);
-    assert(VARIABLE_INDEX(LAST_NONTERMINAL) == 4);
+
     assert(TERMINAL_INDEX(FIRST_TERMINAL) == 0);
     assert(TERMINAL_INDEX(LAST_TERMINAL) == 6);
-
-    for(int i = VARIABLE_INDEX(FIRST_NONTERMINAL); i <= VARIABLE_INDEX(LAST_NONTERMINAL); i++){
-        for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
-
-        }
-    }
-     */
     int i = 0;
 
     while(listProduction[i].head != EMPTY){
@@ -185,21 +179,26 @@ void initParseTable(void){
         setLabel temp = first_production(listProduction[i]);
         setLabel tempFollow = follow(listProduction[i].head);
 
-        for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
 
+        for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
             //paso1
             if(searchLabel( (enum labelTok)j, temp )){
                 parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = &listProduction[i];
-            }else{
-                parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = NULL;
+#ifdef DEBUG
+                if(i == 1){
+                    if(j == 3){
+                        printf("Estoy aqui");
+                        assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(PLUS)] == &listProduction[1]);
+                    }
+                }
+#endif
             }
+
             //paso2
             if(searchLabel(EMPTY, temp)) {
                 for (int k = TERMINAL_INDEX(FIRST_TERMINAL); k <= TERMINAL_INDEX(LAST_TERMINAL); k++) {
-                    if (searchLabel((enum labelTok) k, tempFollow)) {
+                    if(searchLabel((enum labelTok) k, tempFollow)) {
                         parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = &listProduction[i];
-                    }else{
-                        parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = NULL;
                     }
                 }
             }
@@ -208,12 +207,20 @@ void initParseTable(void){
         deleteLabelSet(&tempFollow);
         i++;
     }
+
+#ifdef DEBUG
+    printf("Estoy aqui");
+    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(PLUS)] == &listProduction[1]);
+#endif
 }
 
-static setLabel auxfirst_production(production p, setLabel *t){
+static void auxfirst_production(production p, setLabel *t){
 
+    if(p.longitud_body == 1 && p.body[0] == EMPTY){
+        addLabel(EMPTY, t);
+        return;
+    }
     for(int i = 0; i < p.longitud_body; i++){
-
         setLabel temp = first(p.body[i]);
         unionSet(t, &temp);
         if(!derivesEmptyString(p.body[i])){

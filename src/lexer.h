@@ -15,15 +15,18 @@
 #define ISNULLTOKEN(s) (s == LNULL)
 #define NOTSTRING false
 #define STRING true
-#define NUM_TERMINALS (DIV - NUM + 1)
-#define NUM_VARIABLES (FACTOR - EXPR + 1)
-#define IS_TERMINAL(s) (s <= DIV)
 #define IS_VARIABLE(s) (EXPR <= s && s <= FACTOR)
 #define LAST_VARIABLE ($+1)
+
 #define FIRST_TERMINAL NUM
 #define LAST_TERMINAL DIV
+#define IS_TERMINAL(s) (s <= DIV)
 #define FIRST_NONTERMINAL EXPR
 #define LAST_NONTERMINAL FACTOR
+
+#define NUM_TERMINALS (LAST_TERMINAL - FIRST_TERMINAL + 1)
+#define NUM_VARIABLES (LAST_NONTERMINAL - FIRST_NONTERMINAL + 1)
+
 #define VARIABLE_INDEX(s) (s - EXPR)
 #define TERMINAL_INDEX(s) (s)
 

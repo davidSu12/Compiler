@@ -30,9 +30,19 @@ void testParseTable3(void); //EXPRP
 void testParseTable4(void); //TERMP
 void testParseTable5(void); //FACTOR
 
-int main(int argc, char ** argv){
+int main(int argc, char ** argv) {
 
+
+    testParseTable1();
     testParseTable2();
+
+    /*
+    setLabel t = first(EXPRP);
+    printSetLabel(t);
+*/
+
+    /*Nos falta considerar la cadena vacia*/
+
     return 0;
 }
 
@@ -65,10 +75,10 @@ void testParseTable2(void){
 
     initParseTable();
     assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(LEFTPAR)] == NULL);
-    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(RIGHTPAR)] == NULL);
+    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(RIGHTPAR)] == &listProduction[3]);
     assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(NUM)] == NULL);
-    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(PLUS)] == NULL);
-    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(MINUS)] == NULL);
+    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(PLUS)] == &listProduction[1]);
+    assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(MINUS)] == &listProduction[2]);
     assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(DOT)] == NULL);
     assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(DIV)] == NULL);
 
