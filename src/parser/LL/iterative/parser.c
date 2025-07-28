@@ -6,7 +6,6 @@
 #define TERMINAL_INDEX(s) (s)
 
 
-//TODO: pending to optimize follow.
 
 
 production listProduction[] = {
@@ -75,7 +74,7 @@ bool derivesEmptyString(enum labelTok head){
     }
 }
 
-static void auxFirst(enum labelTok head, listLabel *t){
+static void auxFirst(enum labelTok head, setLabel *t){
 
     //podemos mejorar esto muchisimo
 
@@ -83,7 +82,7 @@ static void auxFirst(enum labelTok head, listLabel *t){
     printf("\nhead:%d\n", head);
 #endif
     if(IS_TERMINAL(head)){
-        if(!insertLabel(head, t)){
+        if(!addLabel(head, t)){
             fprintf(stderr, "An error has ocurred while inserting label in auxFirst\n");
             exit(EXIT_FAILURE);
         }
@@ -101,7 +100,7 @@ static void auxFirst(enum labelTok head, listLabel *t){
                 //estamos ante la produccion que buscabamos
                 if(listProduction[i].longitud_body == 0){
                     //estamos ante la cadena vacia
-                    insertLabel(EMPTY, t);
+                    addLabel(EMPTY, t);
                 }else{
                     //no estamos ante la cadena vacia
                     for(int j = 0; j < listProduction[i].longitud_body; j++){
@@ -122,10 +121,10 @@ static void auxFirst(enum labelTok head, listLabel *t){
 
 
 
-static void auxFollow(enum labelTok head, listLabel *t){
+static void auxFollow(enum labelTok head, setLabel *t){
     int i = 0;
     if(head == EXPR){
-        if(!insertLabel($, t)){
+        if(!addLabel($, t)){
             fprintf(stderr, "An error has ocurred while "
                             "inserting label in t");
             return;
@@ -139,13 +138,13 @@ static void auxFollow(enum labelTok head, listLabel *t){
 
                         //TODO: NOS FALTA CONSIDERAR EL ULTIMO CASO AQUI
                         //head no esta en el final del body
-                        listLabel temp = first(listProduction[i].body[j+1]);
-                        unionList(t, &temp);
+                        setLabel temp = first(listProduction[i].body[j+1]);
+                        unionSet(t, &temp);
                         break;
                     }else{ //caso2
                         if(listProduction[i].head != head){
-                            listLabel temp = follow(listProduction[i].head);
-                            unionList(t, &temp);
+                            setLabel temp = follow(listProduction[i].head);
+                            unionSet(t, &temp);
                             break;
                         }
                     }
@@ -156,16 +155,16 @@ static void auxFollow(enum labelTok head, listLabel *t){
     }
 
 }
-listLabel first(enum labelTok head){
-    listLabel t;
-    createEmptyListLabel(&t);
+setLabel first(enum labelTok head){
+    setLabel t;
+    createEmptySetLabel(&t);
     auxFirst(head, &t);
     return t;
 }
 
-listLabel follow(enum labelTok head){
-    listLabel t;
-    createEmptyListLabel(&t);
+setLabel follow(enum labelTok head){
+    setLabel t;
+    createEmptySetLabel(&t);
     auxFollow(head, &t);
     return t;
 

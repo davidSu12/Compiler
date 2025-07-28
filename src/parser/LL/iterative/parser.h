@@ -3,7 +3,7 @@
 
 #define LEXER_INCLUDE_PATH "../../../lexer.h"
 #include LEXER_INCLUDE_PATH
-#include "variableList.h"
+#include "setLabel.h"
 
 
 enum TypeEntry{ERROR, NORMAL};
@@ -24,9 +24,9 @@ typedef struct entryTable{
 
 
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
-listLabel first(enum labelTok head);
+setLabel first(enum labelTok head);
 bool derivesEmptyString(enum labelTok head);
-listLabel follow(enum labelTok head);
+setLabel follow(enum labelTok head);
 
 
 

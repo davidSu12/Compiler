@@ -14,8 +14,8 @@
 
 int main(int argc, char ** argv){
 
-    //listLabel l = follow(NUM);
-    //printListLabel(l);
-    assert(EXPR == 7);
+
+    setLabel f = first(EXPR);
+    printSetLabel(f);
     return 0;
 }
