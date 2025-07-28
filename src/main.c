@@ -14,7 +14,8 @@
 
 int main(int argc, char ** argv){
 
-    listLabel l = follow(NUM);
-    printListLabel(l);
+    //listLabel l = follow(NUM);
+    //printListLabel(l);
+    assert(EXPR == 7);
     return 0;
 }

@@ -77,6 +77,8 @@ bool derivesEmptyString(enum labelTok head){
 
 static void auxFirst(enum labelTok head, listLabel *t){
 
+    //podemos mejorar esto muchisimo
+
 #ifdef DEBUG
     printf("\nhead:%d\n", head);
 #endif
