@@ -12,21 +12,23 @@
 #include "parser/LL/iterative/testStackProduction.h"
 #endif //TOP_DOWN_IT
 
-
-
 #define TEST_FIRST
 #ifdef TEST_FIRST
 #include "parser/LL/iterative/testFirst/testFirst.h"
-#endif
+#endif //TEST_FIRST
+#undef TEST_FIRST
 
+#define TEST_FOLLOW
+#include "parser/LL/iterative/testFollow/testFollow.h"
+#ifdef TEST_FOLLOW
+#endif //TEST_FOLLOW
 
 int main(int argc, char ** argv){
 
 
-
-    //test1First();
-
-    setLabel t = first(EXPRP);
+    setLabel t = follow(RIGHTPAR);
     printSetLabel(t);
+
+
     return 0;
 }

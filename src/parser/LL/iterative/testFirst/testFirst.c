@@ -2,7 +2,16 @@
 
 
 
+static void auxtestFirst(setLabel t, enum labelTok label){
+    for(int i = 0; i < MAX_LEN_SET; i++){
+        if(i == label){
+            assert(t[i]);
+        }else{
+            assert(!t[i]);
+        }
+    }
 
+}
 
 void test1First(void){
 
@@ -30,17 +39,6 @@ void test1First(void){
 
 }
 
-
-static void auxtest2First(setLabel t, enum labelTok label){
-    for(int i = 0; i < MAX_LEN_SET; i++){
-        if(i == label){
-            assert(t[i]);
-        }else{
-            assert(!t[i]);
-        }
-    }
-
-}
 void test2First(void){
     setLabel t;
     t = first(NUM);
@@ -48,17 +46,17 @@ void test2First(void){
     deleteLabelSet(&t);
 
     t = first(LEFTPAR);
-    auxtest2First(t, LEFTPAR);
+    auxtestFirst(t, LEFTPAR);
 
     deleteLabelSet(&t);
 
     t = first(RIGHTPAR);
-    auxtest2First(t, RIGHTPAR);
+    auxtestFirst(t, RIGHTPAR);
 
     deleteLabelSet(&t);
 
     t = first(PLUS);
-    auxtest2First(t, PLUS);
+    auxtestFirst(t, PLUS);
     deleteLabelSet(&t);
 
 
