@@ -64,6 +64,17 @@ void test2First(void){
 
 }
 void test3First(void){
+    setLabel t;
+    t = first(EXPRP);
+
+    for(int i = 0; i<  MAX_LEN_SET; i++){
+        if(i == PLUS || i == MINUS || i == EMPTY){
+            assert(t[i]);
+        }else{
+            assert(!t[i]);
+        }
+    }
+
 
 }
 void test4First(void);

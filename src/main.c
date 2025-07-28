@@ -26,7 +26,7 @@ int main(int argc, char ** argv){
 
     //test1First();
 
-    setLabel t = first(FACTOR);
+    setLabel t = first(EXPRP);
     printSetLabel(t);
     return 0;
 }
