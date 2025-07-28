@@ -22,7 +22,7 @@ production listProduction[] = {
         {EMPTY, NULL, 0} //final de production
 };
 
-production parseTable[NUM_VARIABLES][NUM_TERMINALS];
+production *parseTable[NUM_VARIABLES][NUM_TERMINALS];
 
 
 
@@ -188,7 +188,9 @@ void initParseTable(void){
     }
      */
     int i = 0;
+
     while(listProduction[i].head != EMPTY){
+
         setLabel temp = first_production(listProduction[i]);
         setLabel tempFollow = follow(listProduction[i].head);
 
@@ -196,19 +198,24 @@ void initParseTable(void){
 
             //paso1
             if(searchLabel( (enum labelTok)j, temp )){
-                parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = listProduction[i];
+                parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = &listProduction[i];
+            }else{
+                parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = NULL;
             }
             //paso2
-            if(searchLabel(EMPTY, temp)){
-                for(int k = TERMINAL_INDEX(FIRST_TERMINAL); k <= TERMINAL_INDEX(LAST_TERMINAL); k++){
-                    if(searchLabel( (enum labelTok)k, tempFollow)){
-                        parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = listProduction[i];
+            if(searchLabel(EMPTY, temp)) {
+                for (int k = TERMINAL_INDEX(FIRST_TERMINAL); k <= TERMINAL_INDEX(LAST_TERMINAL); k++) {
+                    if (searchLabel((enum labelTok) k, tempFollow)) {
+                        parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = &listProduction[i];
+                    }else{
+                        parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = NULL;
                     }
                 }
             }
-
-            //todo:pending to finish
         }
+        deleteLabelSet(&temp);
+        deleteLabelSet(&tempFollow);
+        i++;
     }
 }
 
