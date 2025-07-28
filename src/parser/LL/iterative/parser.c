@@ -175,9 +175,41 @@ setLabel follow(enum labelTok head){
 }
 
 void initParseTable(void){
+    /*
+    assert(VARIABLE_INDEX(FIRST_NONTERMINAL) == 0);
+    assert(VARIABLE_INDEX(LAST_NONTERMINAL) == 4);
+    assert(TERMINAL_INDEX(FIRST_TERMINAL) == 0);
+    assert(TERMINAL_INDEX(LAST_TERMINAL) == 6);
 
+    for(int i = VARIABLE_INDEX(FIRST_NONTERMINAL); i <= VARIABLE_INDEX(LAST_NONTERMINAL); i++){
+        for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
 
-    //for(int i = VARIABLE_INDEX(FIRST_NONTERMINAL); i < VARIABLE_INDEX(LAST_NONTERMINAL); i++)
+        }
+    }
+     */
+    int i = 0;
+    while(listProduction[i].head != EMPTY){
+        setLabel temp = first_production(listProduction[i]);
+        setLabel tempFollow = follow(listProduction[i].head);
+
+        for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
+
+            //paso1
+            if(searchLabel( (enum labelTok)j, temp )){
+                parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = listProduction[i];
+            }
+            //paso2
+            if(searchLabel(EMPTY, temp)){
+                for(int k = TERMINAL_INDEX(FIRST_TERMINAL); k <= TERMINAL_INDEX(LAST_TERMINAL); k++){
+                    if(searchLabel( (enum labelTok)k, tempFollow)){
+                        parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = listProduction[i];
+                    }
+                }
+            }
+
+            //todo:pending to finish
+        }
+    }
 }
 
 static setLabel auxfirst_production(production p, setLabel *t){

@@ -25,8 +25,12 @@
 
 int main(int argc, char ** argv){
 
-    printf("%d", FIRST_NONTERMINAL);
-    printf("%d", LAST_NONTERMINAL);
+    printf("%d", FIRST_NONTERMINAL - EXPR);
+    printf("%d", LAST_NONTERMINAL - EXPR);
+    printf("num vars:%d", NUM_VARIABLES);
+    printf("num terminals:%d",NUM_TERMINALS);
+    printf("%d", FIRST_TERMINAL);
+    printf("%d", LAST_TERMINAL);
 
     return 0;
 }
