@@ -10,6 +10,7 @@
 #include "parser/LL/iterative/parser.h"
 #include "parser/LL/iterative/stack_production.h"
 #include "parser/LL/iterative/testStackProduction.h"
+#include "parser/LL/iterative/parseTable.h"
 #endif //TOP_DOWN_IT
 
 #define TEST_FIRST
@@ -26,6 +27,7 @@
 int main(int argc, char ** argv){
 
     initParseTable();
+    assert(parseTable[VARIABLE_INDEX(EXPR)][TERMINAL_INDEX(LEFTPAR)] == &listProduction[0]);
 
     return 0;
 }

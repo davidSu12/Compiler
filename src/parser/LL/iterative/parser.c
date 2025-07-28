@@ -1,5 +1,5 @@
 #include "parser.h"
-
+#include "parseTable.h"
 
 production listProduction[] = {
         {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
@@ -16,8 +16,6 @@ production listProduction[] = {
 };
 
 production *parseTable[NUM_VARIABLES][NUM_TERMINALS];
-
-
 
 static void SyntaxError(){
     fprintf(stderr, "An error has ocurred\n");
