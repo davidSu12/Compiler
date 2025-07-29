@@ -3,18 +3,10 @@
 
 #define LEXER_INCLUDE_PATH "../../../lexer.h"
 #include LEXER_INCLUDE_PATH
+
 #include "setLabel.h"
-
-
-
-typedef struct production{
-    enum labelTok head;
-    enum labelTok * body;
-    int longitud_body;
-}production;
-
+#include "typesParser.h"
 #include "stack_production.h"
-
 
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
 setLabel first(enum labelTok head);

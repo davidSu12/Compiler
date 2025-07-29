@@ -1,7 +1,11 @@
 #ifndef STACK_PRODUCTION_H
 #define STACK_PRODUCTION_H
 
-#include "parser.h"
+#include "typesParser.h"
+#include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
 
 typedef struct nodeProduction{
     enum labelTok item;

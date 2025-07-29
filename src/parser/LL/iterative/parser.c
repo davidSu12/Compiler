@@ -58,6 +58,10 @@ bool derivesEmptyString(enum labelTok head){
             if(listProduction[i].head == head){
                 //longitud_body == 0 -> body = emptyString
                 if(listProduction[i].longitud_body > 0){
+                    /*In this case the this is just a preventive
+                     comprobation since we could have listProduction[i].longitud == 0
+                     so this is just to check errors
+                     */
                     if(listProduction[i].body[0] == EMPTY){
                         return true;
                     }
@@ -71,27 +75,22 @@ bool derivesEmptyString(enum labelTok head){
 
 static void auxFirst(enum labelTok head, setLabel *t){
 
-#ifdef DEBUG
-    printf("\nhead:%d\n", head);
-#endif
+
     if(IS_TERMINAL(head)){
         if(!addLabel(head, t)){
             fprintf(stderr, "An error has ocurred while inserting label in auxFirst\n");
             exit(EXIT_FAILURE);
         }
-#ifdef DEBUG
-        printf("\ninsertamos: %d\n", head);
-#endif
+
         return;
     }else{
         int i = 0;
         while(listProduction[i].head != EMPTY){
-#ifdef DEBUG
-            printf("\ni:%d\n",i);
-#endif
+
+            //estamos ante la produccion que buscabamos
             if(listProduction[i].head == head){
-                //estamos ante la produccion que buscabamos
-                if(listProduction[i].longitud_body == 1 && listProduction[i].body[0]){
+
+                if(listProduction[i].body[0] == EMPTY){
                     //estamos ante la cadena vacia
                     addLabel(EMPTY, t);
                 }else{
@@ -127,7 +126,6 @@ static void auxFollow(enum labelTok head, setLabel *t){
                 if(listProduction[i].body[j] == head){
                     //caso1
                     if(j < listProduction[i].longitud_body-1){
-
                         //tenemos que considerar todas las reglas aqui
                         setLabel temp = first(listProduction[i].body[j+1]);
                         if(searchLabel(EMPTY, temp)){
@@ -170,8 +168,10 @@ setLabel follow(enum labelTok head){
 
 void initParseTable(void){
 
+#ifdef DEBUG
     assert(TERMINAL_INDEX(FIRST_TERMINAL) == 0);
     assert(TERMINAL_INDEX(LAST_TERMINAL) == 6);
+#endif
     int i = 0;
 
     while(listProduction[i].head != EMPTY){
@@ -184,14 +184,7 @@ void initParseTable(void){
             //paso1
             if(searchLabel( (enum labelTok)j, temp )){
                 parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = &listProduction[i];
-#ifdef DEBUG
-                if(i == 1){
-                    if(j == 3){
-                        printf("Estoy aqui");
-                        assert(parseTable[VARIABLE_INDEX(EXPRP)][TERMINAL_INDEX(PLUS)] == &listProduction[1]);
-                    }
-                }
-#endif
+
             }
 
             //paso2
@@ -240,13 +233,12 @@ setLabel first_production(production p){
 
 
 
-#define DEBUG1
-
 
 bool parse(){
 
     createEmptyStackProd();
     token tok = getNextToken();
+
     if(!pushLabel(EXPR)){
         fprintf(stderr, "An error has ocurred while doing "
                         "a push on parse function on iterative parser");
@@ -255,12 +247,8 @@ bool parse(){
 
 
     while(!isEmptyStack()){
-        printStack();
-#ifdef DEBUG
-        printf("stack content:");
-        printStack();
-        printf("token content: %d\n", tok -> label);
-#endif
+
+
         if(tok == NULL && IS_TERMINAL(peekLabel())){
             SyntaxError();
         }else if(tok == NULL && !IS_TERMINAL(peekLabel())){
@@ -278,31 +266,11 @@ bool parse(){
         }else if(IS_TERMINAL(peekLabel()) && (peekLabel() != tok -> label)){
             SyntaxError();
         }else if(parseTable[VARIABLE_INDEX(peekLabel())][TERMINAL_INDEX(tok -> label)] == NULL){
-#ifdef DEBUG1
-            printf("Estoy aqui\n");
-#endif
             SyntaxError();
         }else if(parseTable[VARIABLE_INDEX(peekLabel())][TERMINAL_INDEX(tok -> label)] != NULL){
-#ifdef DEBUG
-            printf("Estoy aqui\n");
-            printf("%d\n",peekLabel());
-            printf("%d\n",tok -> label);
-#endif
+
             enum labelTok temp = peekLabel();
             popLabel();
-#ifdef DEBUG
-            printf("temp:%d\n", temp);
-            assert(parseTable[temp][tok -> label] == &listProduction[0]);
-
-            production p = *parseTable[temp][tok -> label];
-            printf("head:%d\n",p.head);
-            pushProduction(*(parseTable[temp][tok -> label]));
-            assert(!isEmptyStack());
-
-            printf("head:%d\n",p.head);
-#endif
-
-
             if(!pushProduction(*parseTable[VARIABLE_INDEX(temp)][TERMINAL_INDEX(tok -> label)])){
                 fprintf(stderr, "An error has ocurred while pushing production on parse function");
                 exit(EXIT_FAILURE);
@@ -310,12 +278,6 @@ bool parse(){
         }
     }
 
-
-    finish:
-    if((getNextToken() == NULL)){
-        return true;
-    }else{
-        return false;
-    }
-
+    if((getNextToken() == NULL)) return true;
+    return false;
 }

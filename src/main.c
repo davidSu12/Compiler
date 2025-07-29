@@ -10,7 +10,7 @@
 #ifdef TOP_DOWN_IT
 #include "parser/LL/iterative/parser.h"
 #include "parser/LL/iterative/stack_production.h"
-#include "parser/LL/iterative/testStackProduction.h"
+#include "parser/LL/iterative/testStackProduction/testStackProduction.h"
 #include "parser/LL/iterative/parseTable.h"
 #endif //TOP_DOWN_IT
 
@@ -35,19 +35,7 @@
 int main(int argc, char ** argv) {
     initParseTable();
     initBuffer();
-    parse();
-    /*
-    pushProduction(*&listProduction[9]);
-    assert(!isEmptyStack());
-    assert(peekLabel() == LEFTPAR);
-    popLabel();
-    assert(peekLabel() == EXPR);
-    popLabel();
-    assert(peekLabel() == RIGHTPAR);
-    popLabel();
-    assert(isEmptyStack());
-*/
+    assert(parse());
 
-    //testParseTable1();
     return 0;
 }

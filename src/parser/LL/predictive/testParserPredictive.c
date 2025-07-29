@@ -3,56 +3,56 @@
 
 
 void ParserBadCasesTest(){
-#ifdef TEST_PARSER
+
     initBufferString("1++2");
-initParser();
-assert(!parse());
-deleteListToken();
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("((1+2)");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("((1+2)");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("1+2)");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("1+2)");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("(3*)4");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("(3*)4");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("5+");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("5+");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("*3+2");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("*3+2");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("((2+3)*(4-))");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("((2+3)*(4-))");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("()");
-initParser();
-assert(!parse());
-deleteListToken();
+    initBufferString("()");
+    initParser();
+    assert(!parse());
+    deleteListToken();
 
-initBufferString("");
-initParser();
-assert(!parse());
-deleteListToken();
-#endif
+    initBufferString("");
+    initParser();
+    assert(!parse());
+    deleteListToken();
+
 }
 
 void testParser(){
-#ifdef TEST_PARSER
+
     initBufferString("1+2*3");
     initParser();
     assert(parse());
@@ -98,11 +98,10 @@ void testParser(){
     assert(parse());
     deleteListToken();
 
-#endif
+
 };
 void test(){
 
-#ifdef DEBUG
     token m;
     initBuffer();
 
@@ -116,6 +115,6 @@ void test(){
         }
     }
     deleteListToken();
-#endif
+
 
 }
