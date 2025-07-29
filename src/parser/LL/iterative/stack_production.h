@@ -10,6 +10,9 @@ typedef struct nodeProduction{
 
 typedef struct nodeProduction * stackProduction;
 
+
+
+void createEmptyStackProd();
 /**
  * @param el element to introduce in the stack
  * @return true if everything goes right false otherwise
@@ -40,4 +43,5 @@ void popLabel();
 bool pushLabel(enum labelTok label);
 
 
+void printStack();
 #endif

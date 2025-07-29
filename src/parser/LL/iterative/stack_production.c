@@ -2,7 +2,7 @@
 
 
 
-static stackProduction stackProd = NULL;
+static stackProduction stackProd;
 
 
 bool pushLabel(enum labelTok label){
@@ -23,7 +23,6 @@ bool pushProduction(production el){
     for(int i = (el.longitud_body)-1; i >= 0; i--){
         enum labelTok temp = el.body[i];
         if(!pushLabel(temp)){
-            assert(false);
             int j = (el.longitud_body) - i;
             while(j != 0){
                 popLabel();
@@ -33,7 +32,11 @@ bool pushProduction(production el){
         }
 
     }
-    assert(stackProd == NULL);
+
+#ifdef DEBUG
+    printStack();
+#endif
+    assert(stackProd != NULL);
     return true;
 }
 
@@ -59,4 +62,19 @@ void popLabel(){
     free(temp);
 
 
+}
+
+void printStack(){
+
+    nodeProduction * temp;
+    temp = stackProd;
+    while(temp != NULL){
+        printf("%d ", temp -> item);
+        temp = temp -> next;
+    }
+    printf("\n");
+}
+
+void createEmptyStackProd(){
+    stackProd = NULL;
 }

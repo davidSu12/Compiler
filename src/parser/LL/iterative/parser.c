@@ -18,7 +18,7 @@ production listProduction[] = {
 production *parseTable[NUM_VARIABLES][NUM_TERMINALS] = {NULL};
 
 static void SyntaxError(){
-    fprintf(stderr, "An error has ocurred\n");
+    fprintf(stderr, "Syntax error\n");
     exit(EXIT_FAILURE);
 }
 
@@ -238,31 +238,81 @@ setLabel first_production(production p){
 
 }
 
+
+
+#define DEBUG1
+
+
 bool parse(){
+
+    createEmptyStackProd();
     token tok = getNextToken();
     if(!pushLabel(EXPR)){
         fprintf(stderr, "An error has ocurred while doing "
                         "a push on parse function on iterative parser");
         exit(EXIT_FAILURE);
     }
+
+
     while(!isEmptyStack()){
-        if(peekLabel() == tok -> label){
+        printStack();
+#ifdef DEBUG
+        printf("stack content:");
+        printStack();
+        printf("token content: %d\n", tok -> label);
+#endif
+        if(tok == NULL && IS_TERMINAL(peekLabel())){
+            SyntaxError();
+        }else if(tok == NULL && !IS_TERMINAL(peekLabel())){
+            while(!IS_TERMINAL(peekLabel())){
+                popLabel();
+                if(isEmptyStack()){
+                    break;
+                }
+            }
+        }else if(peekLabel() == EMPTY){
+            popLabel();
+        }else if(IS_TERMINAL(peekLabel()) && (peekLabel() == tok -> label)){
             popLabel();
             tok = getNextToken();
-        }else if(IS_TERMINAL(peekLabel())){
+        }else if(IS_TERMINAL(peekLabel()) && (peekLabel() != tok -> label)){
             SyntaxError();
-        }else if(parseTable[peekLabel()][tok -> label] == NULL){
+        }else if(parseTable[VARIABLE_INDEX(peekLabel())][TERMINAL_INDEX(tok -> label)] == NULL){
+#ifdef DEBUG1
+            printf("Estoy aqui\n");
+#endif
             SyntaxError();
-        }else if(parseTable[peekLabel()][tok -> label] != NULL){
+        }else if(parseTable[VARIABLE_INDEX(peekLabel())][TERMINAL_INDEX(tok -> label)] != NULL){
+#ifdef DEBUG
+            printf("Estoy aqui\n");
+            printf("%d\n",peekLabel());
+            printf("%d\n",tok -> label);
+#endif
             enum labelTok temp = peekLabel();
             popLabel();
-            if(!pushProduction(*(parseTable[temp][tok -> label]))){
+#ifdef DEBUG
+            printf("temp:%d\n", temp);
+            assert(parseTable[temp][tok -> label] == &listProduction[0]);
+
+            production p = *parseTable[temp][tok -> label];
+            printf("head:%d\n",p.head);
+            pushProduction(*(parseTable[temp][tok -> label]));
+            assert(!isEmptyStack());
+
+            printf("head:%d\n",p.head);
+#endif
+
+
+            if(!pushProduction(*parseTable[VARIABLE_INDEX(temp)][TERMINAL_INDEX(tok -> label)])){
                 fprintf(stderr, "An error has ocurred while pushing production on parse function");
                 exit(EXIT_FAILURE);
             }
         }
     }
-    if((getNextToken() == NULL) && isEmptyStack()){
+
+
+    finish:
+    if((getNextToken() == NULL)){
         return true;
     }else{
         return false;
