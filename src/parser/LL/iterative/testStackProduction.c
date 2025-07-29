@@ -11,7 +11,7 @@ void testInsertion(void){
     assert(temp -> body[2] == EXPRP);
     assert(temp -> longitud_body == 3);
 
-    assert(pushProduction(temp));
+    assert(pushProduction(*temp));
     assert(peekLabel() == PLUS);
 }
 void testPop(void){
@@ -24,7 +24,7 @@ void testPop(void){
     assert(temp -> body[2] == EXPRP);
     assert(temp -> longitud_body == 3);
 
-    assert(pushProduction(temp));
+    assert(pushProduction(*temp));
     assert(peekLabel() == PLUS);
     popLabel();
     assert(peekLabel()  == TERM);

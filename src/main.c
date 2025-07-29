@@ -33,9 +33,8 @@
 int main(int argc, char ** argv) {
 
 
-
-
-    /*Nos falta considerar la cadena vacia*/
+    initBuffer();
+    parse();
 
     return 0;
 }

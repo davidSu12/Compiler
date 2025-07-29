@@ -237,3 +237,35 @@ setLabel first_production(production p){
     return t;
 
 }
+
+bool parse(){
+    token tok = getNextToken();
+    if(!pushLabel(EXPR)){
+        fprintf(stderr, "An error has ocurred while doing "
+                        "a push on parse function on iterative parser");
+        exit(EXIT_FAILURE);
+    }
+    while(!isEmptyStack()){
+        if(peekLabel() == tok -> label){
+            popLabel();
+            tok = getNextToken();
+        }else if(IS_TERMINAL(peekLabel())){
+            SyntaxError();
+        }else if(parseTable[peekLabel()][tok -> label] == NULL){
+            SyntaxError();
+        }else if(parseTable[peekLabel()][tok -> label] != NULL){
+            enum labelTok temp = peekLabel();
+            popLabel();
+            if(!pushProduction(*(parseTable[temp][tok -> label]))){
+                fprintf(stderr, "An error has ocurred while pushing production on parse function");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+    if((getNextToken() == NULL) && isEmptyStack()){
+        return true;
+    }else{
+        return false;
+    }
+
+}

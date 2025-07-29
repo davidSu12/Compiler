@@ -6,7 +6,6 @@
 #include "setLabel.h"
 
 
-enum TypeEntry{ERROR, NORMAL};
 
 typedef struct production{
     enum labelTok head;
@@ -14,13 +13,7 @@ typedef struct production{
     int longitud_body;
 }production;
 
-typedef struct entryTable{
-    enum TypeEntry tipoEntrada;
-    union element{
-        production prod;
-        void (*error_func)(void);
-    };
-}entryTable;
+#include "stack_production.h"
 
 
 production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
@@ -29,6 +22,10 @@ bool derivesEmptyString(enum labelTok head);
 setLabel follow(enum labelTok head);
 void initParseTable(void);
 setLabel first_production(production p);
+/**
+ * This function parses the specified string by stdin
+ */
+bool parse();
 
 
 

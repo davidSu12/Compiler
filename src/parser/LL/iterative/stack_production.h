@@ -14,7 +14,7 @@ typedef struct nodeProduction * stackProduction;
  * @param el element to introduce in the stack
  * @return true if everything goes right false otherwise
  */
-bool pushProduction(production *el);
+bool pushProduction(production el);
 
 /**
  * @return element that is in the top of the stack

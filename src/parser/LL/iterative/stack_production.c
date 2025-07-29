@@ -15,22 +15,16 @@ bool pushLabel(enum labelTok label){
     temp -> item = label;
     temp -> next = stackProd;
     stackProd = temp;
-    assert(!isEmptyStack());
+    assert(stackProd != NULL);
     return true;
 }
 
-bool pushProduction(production *el){
-    for(int i = (el ->longitud_body)-1; i >= 0; i--){
-        enum labelTok temp = el -> body[i];
+bool pushProduction(production el){
+    for(int i = (el.longitud_body)-1; i >= 0; i--){
+        enum labelTok temp = el.body[i];
         if(!pushLabel(temp)){
-            /*
-             * i tiene cuantos elementos hemos introducido,
-             * de manera que tenemos que eliminar varios elementos
-             */
-            /*
-             * i = 2 el -> longitud_body = 3
-             */
-            int j = (el -> longitud_body) - i;
+            assert(false);
+            int j = (el.longitud_body) - i;
             while(j != 0){
                 popLabel();
                 j--;
@@ -39,7 +33,7 @@ bool pushProduction(production *el){
         }
 
     }
-    assert(!isEmptyStack());
+    assert(stackProd == NULL);
     return true;
 }
 
