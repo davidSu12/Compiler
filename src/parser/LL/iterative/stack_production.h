@@ -1,7 +1,7 @@
 #ifndef STACK_PRODUCTION_H
 #define STACK_PRODUCTION_H
 
-#include "typesParser.h"
+#include "typeProduction.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>

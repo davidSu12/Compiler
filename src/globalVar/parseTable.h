@@ -2,8 +2,8 @@
 #define PARSETABLE_H
 
 
-#define PATH_PARSER_TYPES "../parser/LL/iterative/typesParser.h"
-#define PATH_LEXER_MACROS "../lexerMacros.h"
+#define PATH_PARSER_TYPES "typeProduction.h"
+#define PATH_LEXER_MACROS "lexerMacros.h"
 
 #include PATH_PARSER_TYPES
 #include PATH_LEXER_MACROS

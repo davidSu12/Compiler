@@ -2,7 +2,7 @@
 #define SETLABEL_H
 
 
-#define LEXER_INCLUDE_PATH "../../../lexer.h"
+#define LEXER_INCLUDE_PATH "lexer.h"
 #include LEXER_INCLUDE_PATH
 
 #define MAX_LEN_SET (LAST_VARIABLE)

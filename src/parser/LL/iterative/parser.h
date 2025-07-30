@@ -5,7 +5,7 @@
 #include LEXER_INCLUDE_PATH
 
 #include "setLabel.h"
-#include "typesParser.h"
+#include "typeProduction.h"
 #include "stack_production.h"
 
 #define PATH_PARSE_TABLE "globalVar/parseTable.h"

@@ -1,5 +1,5 @@
-#ifndef TYPESPARSER_H
-#define TYPESPARSER_H
+#ifndef TYPEPRODUCTION_H
+#define TYPEPRODUCTION_H
 
 #define TOKEN_PATH "token.h"
 #include TOKEN_PATH
@@ -9,6 +9,5 @@ typedef struct production{
     enum labelTok * body;
     int longitud_body;
 }production;
-
 
 #endif
