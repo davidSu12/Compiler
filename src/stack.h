@@ -1,16 +1,10 @@
-//
-// Created by sam_s on 26/07/2025.
-//
-
 #ifndef COMPILERIMP_STACK_H
 #define COMPILERIMP_STACK_H
 
 #include "lexer.h"
 
 
-/*
- * stack with a direct relation with list
- */
+
 
 struct nodeStack{
     token elemento;

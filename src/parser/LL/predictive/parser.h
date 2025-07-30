@@ -1,7 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#define LEXER_INCLUDE_PATH "../../../lexer.h"
+#define LEXER_INCLUDE_PATH "lexer.h"
 #include LEXER_INCLUDE_PATH
 
 

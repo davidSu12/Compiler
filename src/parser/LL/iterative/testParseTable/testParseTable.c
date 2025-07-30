@@ -1,9 +1,9 @@
 #include "testParseTable.h"
 
-#define PATH_PARSER_H "../parser.h"
-#define PATH_PARSE_TABLE "../parseTable.h"
+#define PATH_PARSER "parser/LL/iterative/parser.h"
+#include PATH_PARSER
 
-#include PATH_PARSER_H
+#include PATH_LIST_PRODUCTION
 #include PATH_PARSE_TABLE
 
 

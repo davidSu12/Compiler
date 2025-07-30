@@ -1,12 +1,15 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#define LEXER_INCLUDE_PATH "../../../lexer.h"
+#define LEXER_INCLUDE_PATH "lexer.h"
 #include LEXER_INCLUDE_PATH
 
 #include "setLabel.h"
 #include "typesParser.h"
 #include "stack_production.h"
+
+#define PATH_PARSE_TABLE "globalVar/parseTable.h"
+#define PATH_LIST_PRODUCTION  "globalVar/listProduction.h"
 
 /**
  * @param head head of the production

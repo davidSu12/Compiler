@@ -1,7 +1,7 @@
 #ifndef TYPESPARSER_H
 #define TYPESPARSER_H
 
-#define TOKEN_PATH "../../../token.h"
+#define TOKEN_PATH "token.h"
 #include TOKEN_PATH
 
 typedef struct production{

@@ -1,21 +1,8 @@
 #include "parser.h"
-#include "parseTable.h"
 
-production listProduction[] = {
-        {EXPR, (enum labelTok[]){TERM, EXPRP}, 2},
-        {EXPRP, (enum labelTok[]){PLUS, TERM, EXPRP}, 3},
-        {EXPRP, (enum labelTok[]){MINUS, TERM, EXPRP}, 3},
-        {EXPRP, (enum labelTok[]){EMPTY}, 1},
-        {TERM, (enum labelTok[]){FACTOR, TERMP}, 2},
-        {TERMP, (enum labelTok[]){DOT, FACTOR, TERMP}, 3},
-        {TERMP, (enum labelTok[]){DIV, FACTOR, TERMP}, 3},
-        {TERMP, (enum labelTok[]){EMPTY}, 1},
-        {FACTOR, (enum labelTok[]){NUM},1},
-        {FACTOR, (enum labelTok[]){LEFTPAR,EXPR,RIGHTPAR},3},
-        {EMPTY, NULL, 0} //final de production
-};
 
-production *parseTable[NUM_VARIABLES][NUM_TERMINALS] = {NULL};
+#include PATH_PARSE_TABLE
+#include PATH_LIST_PRODUCTION
 
 static void SyntaxError(){
     fprintf(stderr, "Syntax error\n");
@@ -232,10 +219,9 @@ setLabel first_production(production p){
 }
 
 
-
-
 bool parse(){
 
+    initParseTable();
     createEmptyStackProd();
     token tok = getNextToken();
 
@@ -248,6 +234,7 @@ bool parse(){
 
     while(!isEmptyStack()){
 
+        printStack();
 
         if(tok == NULL && IS_TERMINAL(peekLabel())){
             SyntaxError();

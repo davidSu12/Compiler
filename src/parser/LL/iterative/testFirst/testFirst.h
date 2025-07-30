@@ -2,7 +2,7 @@
 #define TESTFIRST_H
 
 
-#define PATH_PARSER "../parser.h"
+#define PATH_PARSER "parser/LL/iterative/parser.h"
 #include PATH_PARSER
 
 void test1First(void);
