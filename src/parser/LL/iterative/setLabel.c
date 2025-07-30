@@ -3,6 +3,10 @@
 
 void createEmptySetLabel(setLabel *set){
     *set = calloc(MAX_LEN_SET, sizeof(bool));
+    if(*set == NULL){
+        fprintf(stderr, "No more memory to create setLabel\n");
+        exit(EXIT_FAILURE);
+    }
 }
 bool isEmptySetLabel(setLabel set){
     return set == NULL;
