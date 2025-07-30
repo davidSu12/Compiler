@@ -17,6 +17,7 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
         for(int i = 0; i < NUM_PRODUCCIONES; i++){
             (*st1)[i] = UNION_SET( (*st1)[i] , (*st2)[i] );
         }
+        deleteSetItem(st2);
     }
     return st1;
 }
@@ -26,7 +27,9 @@ void deleteSetItem(setItem *st1){
 }
 
 
-bool insertItem(setItem *st1, item it){
+
+
+bool addItem(setItem *st1, item it){
 
     if(isEmptySetItem(*st1)){
         return false;
@@ -34,7 +37,10 @@ bool insertItem(setItem *st1, item it){
 
     (*st1)[it.production] = INSERT_ELEMENT((*st1)[it.production], it.item);
 
-    assert(((*st1)[it.production] & (1U << it.item)) == 1);
+#ifdef DEBUG
+    printf("%u", (bool)((*st1)[it.production] & (1U << it.item)));
+#endif
+    assert(((*st1)[it.production] & (1U << it.item)) != 1U);
 
     return true;
 }

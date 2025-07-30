@@ -2,7 +2,7 @@
 #include "lexer.h"
 
 
-#define TOP_DOWN_IT
+
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
@@ -15,13 +15,20 @@
 #endif //TOP_DOWN_IT
 
 
+#define BOTTOM_UP
+#ifdef BOTTOM_UP
+#include "parser/LR/testSetItems/testSetItems.h"
+#endif
+
+
 #include "testHeader.h"
 
 
 int main(int argc, char ** argv) {
 
-
-    printf("%d", (bool) 0U);
+    testSetItem1();
+    testSetItem2();
+    testSetItem3();
 
     return 0;
 }

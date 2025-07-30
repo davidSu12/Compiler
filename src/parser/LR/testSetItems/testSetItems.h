@@ -2,7 +2,7 @@
 #define TESTSETITEMS_H
 
 #include <assert.h>
-
+#include "../setItems.h"
 
 void testSetItem1(void);
 void testSetItem2(void);
