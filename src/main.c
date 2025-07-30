@@ -20,8 +20,8 @@
 
 int main(int argc, char ** argv) {
 
-    initBuffer();
-    assert(parse());
+
+    printf("%d", (bool) 0U);
 
     return 0;
 }
