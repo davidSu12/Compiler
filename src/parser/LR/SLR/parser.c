@@ -1,7 +1,7 @@
 #include "parser.h"
 
 
-setItem * closure(setItem *st1){
+setItem closure(setItem *st1){
     setItem J;
     createEmptySetItem(&J);
     unionSetItems(&J, st1);
@@ -11,9 +11,10 @@ setItem * closure(setItem *st1){
         added = false;
         for(int i = 0; i < NUM_PRODUCCIONES; i++){
             uint32_t temp = J[i]; //guardo el set temporalmente.
+            int k_index = 0;
+            int j;
+
             while(temp != 0){
-                int k_index = 0;
-                int j = 0;
                 j = temp & 1U; // el indice j se encuentra si o no en el conjunto
                 if(j == 1){
                     item temp_item = (struct item){i,k_index};
@@ -24,13 +25,12 @@ setItem * closure(setItem *st1){
                 }
                 temp = temp >> 1;
                 k_index++;
-                j = 0;
-
             }
         }
     }while(!added);
-    return &J;
+    return J;
 }
-setItem * gotoFunction(setItem *st1, enum labelTok token){
+
+setItem gotoFunction(setItem *st1, enum labelTok token){
     return NULL;
 }

@@ -13,8 +13,8 @@
 
 
 
-setItem * closure(setItem *st1);
-setItem * gotoFunction(setItem *st1, enum labelTok token);
+setItem closure(setItem *st1);
+setItem gotoFunction(setItem *st1, enum labelTok token);
 
 
 #endif
