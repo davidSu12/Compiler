@@ -40,8 +40,19 @@ bool addItem(setItem *st1, item it){
             temp -> data.production = it.production;
             temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
 
-        }else{
+        }else if(prev == NULL){
 
+            if(curr -> data.production == it.production){
+                curr -> data.item = INSERT_ELEMENT(curr -> data.item, it.item);
+                free(temp);
+            }else {
+                temp->data.production = it.production;
+                temp->data.item = INSERT_ELEMENT(temp->data.item, it.item);
+                temp->next = *st1;
+                *st1 = temp;
+            }
+
+        }else{
             /*
              * aqui tenemos que considerar dos casos completamente separados
              * curr.production es igual a it.production o desigual
@@ -120,9 +131,12 @@ void deleteSetItem(setItem *st1){
 }
 
 
+
+#define DEBUG
+
 setItem * unionSetItems(setItem *st1, setItem *st2){
 
-    NodeSetItem *temp1, *temp2, *temp3, *temp4;
+    NodeSetItem *temp1, *temp2, *temp3;
     NodeSetItem * prev_temp1 = NULL;
     NodeSetItem * final_list = NULL;
     NodeSetItem * temp_list = NULL;
@@ -130,6 +144,7 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
     temp1 = *st1;
     temp2 = *st2;
 
+    //
 
     if(temp1 == NULL){
         return st2;
@@ -140,36 +155,62 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
     }
 
     if(temp1 -> data.production < temp2 -> data.production){
+
         final_list = temp1;
         prev_temp1 = temp1;
+        assert(final_list -> data.production == temp1 -> data.production);
         temp1 = temp1 -> next;
+
     }else if(temp1 -> data.production > temp2 -> data.production){
+
         final_list = temp2;
+        assert(final_list -> data.production == temp2 -> data.production);
         temp2 = temp2 -> next;
+        //temp1 -> item.production = 2 temp2 -> item.production = 3
+
     }else{
         temp3 = temp2;
-        temp1 -> data.item  = UNION_SET(temp1 -> data.item, temp2 -> data.item);
+        temp1 -> data.item  |= temp2 -> data.item;
+        assert((*st1) -> data.item == temp1 -> data.item);
         final_list = temp1;
         temp2 = temp2 -> next;
         free(temp3);
+        prev_temp1 = temp1;
+        temp1 = temp1 -> next;
+        assert(temp2 != NULL);
+
     }
 
     temp_list = final_list;
+    //final_list = 1
 
     while(temp1 != NULL){
 
         if(temp2 == NULL){
+            temp_list -> next = temp1;
+            *st1 = final_list;
             return st1;
         }
 
+
         if(temp1 -> data.production < temp2 -> data.production){
+            prev_temp1 = temp1;
             temp_list -> next = temp1;
+            temp_list = temp_list -> next;
+            //temp1 = 4
+
             temp1 = temp1 -> next;
         }else if(temp1 -> data.production > temp2 -> data.production){
-            temp_list -> next = temp2;
+
+            temp_list-> next = temp2;
+            temp_list = temp_list -> next;
+            //temp2 = 5
+
             temp2 = temp2 -> next;
+
         }else{
             temp_list -> next = temp1;
+            temp_list = temp_list -> next;
             temp1 -> data.item = UNION_SET(temp1 -> data.item, temp2 -> data.item);
             temp3 = temp2;
             temp2 = temp2 -> next;
@@ -180,7 +221,8 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
 
 
     prev_temp1 -> next = temp2;
-    return st2;
+    *st1 = final_list;
+    return st1;
 }
 
 void printSetItem(setItem st1, void (*viewBinary)(uint32_t d)){
