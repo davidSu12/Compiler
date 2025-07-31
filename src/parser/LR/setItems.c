@@ -196,3 +196,10 @@ void printSetItem(setItem st1, void (*viewBinary)(uint32_t d)){
         }
     }
 }
+
+NodeSetItem * getSetProduction(setItem st1, uint32_t num_production){
+
+    NodeSetItem *temp;
+    for(temp = st1; temp != NULL && (temp -> data.production != num_production); temp = temp -> next);
+    return temp;
+}
