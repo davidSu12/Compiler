@@ -32,8 +32,13 @@ void testSetItem1(void){
 
     printSetItem(st1, viewBinary);
     assert(itemInSet(st1, (struct item){1,2}));
-    assert(itemInSet(st1, (struct item){1,1}));
+    assert(!itemInSet(st1, (struct item){1,1}));
     assert(itemInSet(st1, (struct item){1,0}));
+
+    printf("\nafter eliminating:\n");
+    deleteItem(&st1, (struct item){1,2});
+    assert(!itemInSet(st1, (struct item){1,2}));
+    printSetItem(st1, viewBinary);
 
 }
 void testSetItem2(void){
