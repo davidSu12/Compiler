@@ -40,11 +40,6 @@ bool addItem(setItem *st1, item it){
             temp -> data.production = it.production;
             temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
 
-        }else if(prev == NULL){
-            temp -> next = *st1;
-            temp -> data.production = it.production;
-            temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
-            *st1 = temp;
         }else{
 
             /*
@@ -52,7 +47,8 @@ bool addItem(setItem *st1, item it){
              * curr.production es igual a it.production o desigual
              */
             if(curr -> data.production == it.production){
-                curr -> data.item |= it.item;
+                curr -> data.item = INSERT_ELEMENT(curr -> data.item, it.item);
+                assert(ELEMENT_IN_SET(curr -> data.item, it.item) != 0);
                 free(temp);
             }else{
                 //es mayor entonces prev es el anterior
@@ -60,15 +56,13 @@ bool addItem(setItem *st1, item it){
                 temp -> next = curr;
                 temp -> data.production = it.production;
                 temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
-
+                assert(ELEMENT_IN_SET(temp -> data.item, it.item) != 0);
 
             }
         }
 
     }
 
-
-    //assert(ELEMENT_IN_SET(temp -> data.item, it.item) != 0);
     return true;
 
 }
@@ -185,9 +179,20 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
     return st1;
 }
 
-void printSetItem(setItem st1){
+void printSetItem(setItem st1, void (*viewBinary)(uint32_t d)){
     NodeSetItem *temp1;
-    for(temp1 = st1; temp1 != NULL; temp1 = temp1 -> next){
-        printf("production: %d\nitemSet: %d\n", temp1 -> data.production, temp1->data.item);
+    if(viewBinary == NULL){
+        for(temp1 = st1; temp1 != NULL; temp1 = temp1 -> next){
+            printf("production: %d\nitemSet: %d\n", temp1 -> data.production, temp1->data.item);
+        }
+    }else{
+        for(temp1 = st1; temp1 != NULL; temp1 = temp1 -> next){
+            printf("======\n");
+            printf("production: %d\nitemSet: %d\n", temp1 -> data.production, temp1->data.item);
+            printf("set:");
+            viewBinary(temp1 -> data.item);
+            printf("\n");
+            printf("======\n");
+        }
     }
 }

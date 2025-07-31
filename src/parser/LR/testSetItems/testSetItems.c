@@ -4,9 +4,7 @@
 
 static void privateViewBinary(uint32_t d, int count){
     if(d == 0){
-        for(int i = 0; i <= 32 - count; i++){
-            printf("0");
-        }
+        printf("0");
         return;
     }
     privateViewBinary(d >>1, count++);
@@ -25,11 +23,17 @@ void testSetItem1(void){
     createEmptySetItem(&st1);
 
     assert(addItem(&st1, (struct item){1,2}));
+    assert(addItem(&st1, (struct item){5, 1}));
+    assert(addItem(&st1, (struct item){1,0}));
+    assert(addItem(&st1, (struct item){ 3, 5}));
+
     assert(addItem(&st1, (struct item){2,1}));
     assert(st1 != NULL);
 
-    printSetItem(st1);
-    viewBinary(st1 -> data.item);
+    printSetItem(st1, viewBinary);
+    assert(itemInSet(st1, (struct item){1,2}));
+    assert(itemInSet(st1, (struct item){1,1}));
+    assert(itemInSet(st1, (struct item){1,0}));
 
 }
 void testSetItem2(void){

@@ -42,6 +42,6 @@ bool addItem(setItem *st1, item it);
 bool itemInSet(setItem st1, item it);
 bool isEmptySetItem(setItem st1);
 void deleteItem(setItem *st1, item it);
-void printSetItem(setItem st1);
+void printSetItem(setItem st1, void (*viewBinary)(uint32_t));
 
 #endif
