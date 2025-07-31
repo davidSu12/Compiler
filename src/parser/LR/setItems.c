@@ -119,15 +119,17 @@ void deleteSetItem(setItem *st1){
     assert(*st1 == NULL);
 }
 
+
 setItem * unionSetItems(setItem *st1, setItem *st2){
 
     NodeSetItem *temp1, *temp2, *temp3, *temp4;
-    NodeSetItem *prev_temp1;
+    NodeSetItem * prev_temp1 = NULL;
+    NodeSetItem * final_list = NULL;
+    NodeSetItem * temp_list = NULL;
 
     temp1 = *st1;
     temp2 = *st2;
 
-    bool stopped = false;
 
     if(temp1 == NULL){
         return st2;
@@ -137,46 +139,48 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
         return st1;
     }
 
-    do{
-        for(
-                prev_temp1 = NULL;
-                (temp1 != NULL) && (temp1 -> data.production > temp2 -> data.production);
-                prev_temp1 = temp1, temp1 = temp1 -> next
-                        );
+    if(temp1 -> data.production < temp2 -> data.production){
+        final_list = temp1;
+        prev_temp1 = temp1;
+        temp1 = temp1 -> next;
+    }else if(temp1 -> data.production > temp2 -> data.production){
+        final_list = temp2;
+        temp2 = temp2 -> next;
+    }else{
+        temp3 = temp2;
+        temp1 -> data.item  = UNION_SET(temp1 -> data.item, temp2 -> data.item);
+        final_list = temp1;
+        temp2 = temp2 -> next;
+        free(temp3);
+    }
 
-        if(temp1 == NULL){
-            stopped = true;
-        }else{
-            //aqui tenemos que insertar
-            //temp1 -> data.production <= temp2 -> data.production
-            if(temp1 -> data.production == temp2 -> data.production){
+    temp_list = final_list;
 
-                temp1 -> data.item |= temp2 -> data.item;
-                temp3 = temp2;
-                temp2 = temp2 -> next;
-                free(temp3);
+    while(temp1 != NULL){
 
-            }else{
-
-                temp3 = temp2 -> next;
-                temp4 = temp1 -> next;
-                temp1 -> next = temp2;
-                temp2 -> next = temp4;
-                temp1 = temp2;
-                temp2 = temp3;
-
-            }
-
-            if(temp2 == NULL){
-                return st1;
-            }
+        if(temp2 == NULL){
+            return st1;
         }
-    }while(!stopped);
 
-    //temp1 == NULL
+        if(temp1 -> data.production < temp2 -> data.production){
+            temp_list -> next = temp1;
+            temp1 = temp1 -> next;
+        }else if(temp1 -> data.production > temp2 -> data.production){
+            temp_list -> next = temp2;
+            temp2 = temp2 -> next;
+        }else{
+            temp_list -> next = temp1;
+            temp1 -> data.item = UNION_SET(temp1 -> data.item, temp2 -> data.item);
+            temp3 = temp2;
+            temp2 = temp2 -> next;
+            free(temp3);
+
+        }
+    }
+
 
     prev_temp1 -> next = temp2;
-    return st1;
+    return st2;
 }
 
 void printSetItem(setItem st1, void (*viewBinary)(uint32_t d)){

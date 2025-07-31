@@ -26,7 +26,7 @@
 
 int main(int argc, char ** argv) {
 
-    testSetItem1();
-    testSetItem2();
+
+    testSetItem3();
     return 0;
 }

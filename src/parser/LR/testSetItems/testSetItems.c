@@ -71,4 +71,27 @@ void testSetItem2(void){
 
 void testSetItem3(void){
 
+    setItem st1;
+    setItem st2;
+    createEmptySetItem(&st1);
+    createEmptySetItem(&st2);
+
+
+    assert(addItem(&st1, (struct item){2,0}));
+    assert(addItem(&st1, (struct item){4,0}));
+    assert(addItem(&st1, (struct item){6, 0}));
+    assert(addItem(&st2, (struct item){1, 1}));
+    assert(addItem(&st2, (struct item){3,1}));
+    assert(addItem(&st2, (struct item){5,1}));
+
+
+    printSetItem(st1, viewBinary);
+    printSetItem(st2, viewBinary);
+    
+    setItem *st3 = unionSetItems(&st1, &st2);
+
+    printSetItem(*st3, viewBinary);
+
+
+
 }
