@@ -120,3 +120,61 @@ void deleteSetItem(setItem *st1){
 
     assert(*st1 == NULL);
 }
+
+setItem * unionSetItems(setItem *st1, setItem *st2){
+
+    NodeSetItem *temp1, *temp2, *temp3, *temp4;
+    NodeSetItem *prev_temp1;
+
+    temp1 = *st1;
+    temp2 = *st2;
+
+    bool stopped = false;
+
+    if(temp1 == NULL){
+        return st2;
+    }
+
+    if(temp2 == NULL){
+        return st1;
+    }
+
+    do{
+        for(prev_temp1 = NULL;
+        (temp1 != NULL) && (temp1 -> data.production > temp2 -> data.production);
+        prev_temp1 = temp1, temp1 = temp1 -> next);
+
+        if(temp1 == NULL){
+            stopped = true;
+        }else{
+            //aqui tenemos que insertar
+            //temp1 -> data.production <= temp2 -> data.production
+            if(temp1 -> data.production == temp2 -> data.production){
+
+                temp1 -> data.item |= temp2 -> data.item;
+                temp3 = temp2;
+                temp2 = temp2 -> next;
+                free(temp3);
+
+            }else{
+
+                temp3 = temp2 -> next;
+                temp4 = temp1 -> next;
+                temp1 -> next = temp2;
+                temp2 -> next = temp4;
+                temp1 = temp2;
+                temp2 = temp3;
+
+            }
+
+            if(temp2 == NULL){
+                return st1;
+            }
+        }
+    }while(!stopped);
+
+    //temp1 == NULL
+
+    prev_temp1 -> next = temp2;
+    return st1;
+}
