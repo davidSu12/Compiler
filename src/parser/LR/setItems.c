@@ -63,6 +63,8 @@ bool addItem(setItem *st1, item it){
         }
 
     }
+
+    assert(ELEMENT_IN_SET(temp -> data.item, it.item) == 0);
     return true;
 
 }
@@ -101,6 +103,20 @@ void deleteItem(setItem *st1, item it){
     }else{
 
         temp -> data.item = DELETE_ELEMENT(temp -> data.item, it.item);
+        assert(ELEMENT_IN_SET(temp -> data.item, it.item) == 0);
     }
 
+}
+
+void deleteSetItem(setItem *st1){
+
+    NodeSetItem *temp = *st1;
+
+    while(temp != NULL){
+        *st1 = (*st1) -> next;
+        free(temp);
+        temp = *st1;
+    }
+
+    assert(*st1 == NULL);
 }
