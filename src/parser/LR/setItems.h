@@ -15,9 +15,19 @@
  * preprocessing the list of productions
  */
 
-#define NUM_PRODUCCIONES 10
 
-typedef uint32_t *setItem;
+/*
+ * We are gonna
+ * interchange space complexity for time complexity
+ */
+
+typedef struct NodeSetItem{
+    item data;
+    struct NodeSetItem * next;
+}NodeSetItem;
+
+typedef struct NodeSetItem * setItem;
+
 
 #define DELETE_ELEMENT(set, i) (set & ~((1U << i)))
 #define INSERT_ELEMENT(set, i) ( set | (1U << i))
@@ -32,5 +42,6 @@ bool addItem(setItem *st1, item it);
 bool itemInSet(setItem st1, item it);
 bool isEmptySetItem(setItem st1);
 void deleteItem(setItem *st1, item it);
+
 
 #endif

@@ -1,64 +1,67 @@
 #include "setItems.h"
 
+
 void createEmptySetItem(setItem *st1){
-
-    *st1 = calloc(NUM_PRODUCCIONES, sizeof(uint32_t));
-
-    if(*st1 == NULL){
-        fprintf(stderr, "An error has ocurred while allocating memory for setItem\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
-setItem * unionSetItems(setItem *st1, setItem *st2){
-    if(isEmptySetItem(*st1)){
-        return st2;
-    }else{
-        for(int i = 0; i < NUM_PRODUCCIONES; i++){
-            (*st1)[i] = UNION_SET( (*st1)[i] , (*st2)[i] );
-        }
-        deleteSetItem(st2);
-    }
-    return st1;
-}
-void deleteSetItem(setItem *st1){
-    free(*st1);
     *st1 = NULL;
 }
-
-
-
-
-bool addItem(setItem *st1, item it){
-
-    if(isEmptySetItem(*st1)){
-        return false;
-    }
-
-    (*st1)[it.production] = INSERT_ELEMENT((*st1)[it.production], it.item);
-
-#ifdef DEBUG
-    printf("%u", (bool)((*st1)[it.production] & (1U << it.item)));
-#endif
-    assert(((*st1)[it.production] & (1U << it.item)) != 1U);
-
-    return true;
-}
-bool itemInSet(setItem st1, item it){
-    return (bool) ELEMENT_IN_SET(st1[it.production], it.item);
-}
-
 bool isEmptySetItem(setItem st1){
     return st1 == NULL;
 }
+bool addItem(setItem *st1, item it){
 
-void deleteItem(setItem *st1, item it){
+    NodeSetItem *prev, *curr;
+    NodeSetItem *temp = malloc(sizeof(struct NodeSetItem));
 
-    if(isEmptySetItem(*st1)){
-        return;
+    if(temp == NULL){
+        fprintf(stderr, "An error has ocurred while allocating memory for NodeSetItem");
+        exit(EXIT_FAILURE);
     }
 
-    (*st1)[it.production]  = DELETE_ELEMENT((*st1)[it.production], it.item);
+    if(isEmptySetItem(*st1)){
+        temp -> data.production = it.production;
+        temp -> data.item = it.item;
+        temp -> next = NULL;
+    }else{
 
-    assert(((*st1)[it.production] & (1U << it.item)) == 0);
+        for(prev = NULL, curr = *st1;
+            (curr != NULL) && (it.production > curr ->data.production);
+            prev = curr, curr = curr -> next);
+
+        if(curr == NULL){
+            /*
+             * estamos en el final de manera que no nos queda otra que añadir en el final
+             */
+            prev -> next = temp;
+            temp -> next = NULL;
+            temp -> data.production = it.production;
+            temp -> data.item = it.item;
+
+        }else if(prev == NULL){
+            temp -> next = *st1;
+            temp -> data.production = it.production;
+            temp -> data.item = it.item;
+            *st1 = temp;
+        }else{
+
+            /*
+             * aqui tenemos que considerar dos casos completamente separados
+             * curr.production es igual a it.production o desigual
+             */
+            if(curr -> data.production == it.production){
+                curr -> data.item |= it.item;
+                free(temp);
+            }else{
+                //es mayor entonces prev es el anterior
+                prev -> next = temp;
+                temp -> next = curr;
+                temp -> data.production = it.production;
+                temp -> data.item = it.item;
+
+
+            }
+        }
+
+    }
+    return true;
+
 }
