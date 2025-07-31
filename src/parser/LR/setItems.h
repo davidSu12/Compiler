@@ -36,14 +36,12 @@ typedef struct NodeSetItem * setItem;
 
 
 void createEmptySetItem(setItem *st1);
-
 setItem * unionSetItems(setItem *st1, setItem *st2); //falta por implementar
-
 void deleteSetItem(setItem *st1);
 bool addItem(setItem *st1, item it);
 bool itemInSet(setItem st1, item it);
 bool isEmptySetItem(setItem st1);
 void deleteItem(setItem *st1, item it);
-
+void printSetItem(setItem st1);
 
 #endif

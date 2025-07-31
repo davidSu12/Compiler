@@ -18,10 +18,13 @@ bool addItem(setItem *st1, item it){
         exit(EXIT_FAILURE);
     }
 
+    temp -> data.item = 0; //inicializamos el conjunto
+
     if(isEmptySetItem(*st1)){
         temp -> data.production = it.production;
-        temp -> data.item = it.item;
+        temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
         temp -> next = NULL;
+        *st1 = temp;
     }else{
 
         for(prev = NULL, curr = *st1;
@@ -35,12 +38,12 @@ bool addItem(setItem *st1, item it){
             prev -> next = temp;
             temp -> next = NULL;
             temp -> data.production = it.production;
-            temp -> data.item = it.item;
+            temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
 
         }else if(prev == NULL){
             temp -> next = *st1;
             temp -> data.production = it.production;
-            temp -> data.item = it.item;
+            temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
             *st1 = temp;
         }else{
 
@@ -56,7 +59,7 @@ bool addItem(setItem *st1, item it){
                 prev -> next = temp;
                 temp -> next = curr;
                 temp -> data.production = it.production;
-                temp -> data.item = it.item;
+                temp -> data.item = INSERT_ELEMENT(temp -> data.item, it.item);
 
 
             }
@@ -64,7 +67,8 @@ bool addItem(setItem *st1, item it){
 
     }
 
-    assert(ELEMENT_IN_SET(temp -> data.item, it.item) == 0);
+
+    //assert(ELEMENT_IN_SET(temp -> data.item, it.item) != 0);
     return true;
 
 }
@@ -140,9 +144,11 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
     }
 
     do{
-        for(prev_temp1 = NULL;
-        (temp1 != NULL) && (temp1 -> data.production > temp2 -> data.production);
-        prev_temp1 = temp1, temp1 = temp1 -> next);
+        for(
+                prev_temp1 = NULL;
+                (temp1 != NULL) && (temp1 -> data.production > temp2 -> data.production);
+                prev_temp1 = temp1, temp1 = temp1 -> next
+                        );
 
         if(temp1 == NULL){
             stopped = true;
@@ -177,4 +183,11 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
 
     prev_temp1 -> next = temp2;
     return st1;
+}
+
+void printSetItem(setItem st1){
+    NodeSetItem *temp1;
+    for(temp1 = st1; temp1 != NULL; temp1 = temp1 -> next){
+        printf("production: %d\nitemSet: %d\n", temp1 -> data.production, temp1->data.item);
+    }
 }

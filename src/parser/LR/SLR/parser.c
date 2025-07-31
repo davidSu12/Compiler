@@ -1,6 +1,7 @@
 #include "parser.h"
 
-
+#define NUM_PRODUCCIONES
+/*
 setItem closure(setItem *st1){
     setItem J;
     createEmptySetItem(&J);
@@ -34,3 +35,4 @@ setItem closure(setItem *st1){
 setItem gotoFunction(setItem *st1, enum labelTok token){
     return NULL;
 }
+ */
