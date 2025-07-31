@@ -7,6 +7,7 @@ void createEmptySetItem(setItem *st1){
 bool isEmptySetItem(setItem st1){
     return st1 == NULL;
 }
+
 bool addItem(setItem *st1, item it){
 
     NodeSetItem *prev, *curr;
@@ -63,5 +64,43 @@ bool addItem(setItem *st1, item it){
 
     }
     return true;
+
+}
+
+bool itemInSet(setItem st1, item it){
+
+    NodeSetItem *temp;
+
+    if(isEmptySetItem(st1)){
+        return false;
+    }
+
+
+    for(temp = st1 ;temp != NULL && (temp -> data.production != it.production); temp = temp -> next);
+
+    if(temp == NULL){
+        return false;
+    }else{
+        if( ELEMENT_IN_SET(temp -> data.item, it.item)  != 0 ){
+            return true;
+        }
+    }
+    return false;
+}
+
+void deleteItem(setItem *st1, item it){
+    NodeSetItem *temp;
+
+    if(isEmptySetItem(*st1)){
+        return;
+    }
+    for(temp = *st1; temp != NULL && (temp -> data.production != it.production); temp = temp -> next);
+
+    if(temp == NULL){
+        return;
+    }else{
+
+        temp -> data.item = DELETE_ELEMENT(temp -> data.item, it.item);
+    }
 
 }
