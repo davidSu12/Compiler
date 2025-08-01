@@ -1,38 +1,51 @@
 #include "parser.h"
 
-#define NUM_PRODUCCIONES
-/*
-setItem closure(setItem *st1){
-    setItem J;
-    createEmptySetItem(&J);
-    unionSetItems(&J, st1);
 
+setItem * closure(setItem *st1){
+
+    setItem *J = st1;
     bool added;
+    NodeSetItem *temp;
+
     do{
         added = false;
-        for(int i = 0; i < NUM_PRODUCCIONES; i++){
-            uint32_t temp = J[i]; //guardo el set temporalmente.
-            int k_index = 0;
-            int j;
-            while(temp != 0){
-                //todo: ¡ hay que comprobar cada produccion !
-                j = temp & 1U; // el indice j se encuentra si o no en el conjunto
-                if(j == 1){
-                    item temp_item = (struct item){i,k_index};
-                    if(!itemInSet(J, temp_item)){
-                        addItem(&J,temp_item);
-                        added = true;
+        for(temp = *J; temp != NULL; temp = temp -> next){
+            //tenemos que mirar cada conjunto por separado
+            item temp1 = temp -> data;
+            uint32_t production = temp1.production;
+            uint32_t setItem = temp1.item;
+            int p_index = 0;
+            while(setItem != 0){
+                uint32_t isInSet = setItem & 1U;
+                if(isInSet){
+
+                    if(p_index < listProduction[production].longitud_body){
+                        enum labelTok nextToken = listProduction[production].body[p_index];
+
+                        int index = 0;
+                        while(listProduction[index].head != EMPTY){
+                            if(listProduction[index].head == nextToken){
+                                added = addItem(J,(struct item){index, 0});
+                                if(!added){
+                                    fprintf(stderr, "An error has ocurred "
+                                                    "while adding item to set item in closure");
+                                    exit(EXIT_FAILURE);
+                                }
+                            }
+                            index++;
+                        }
+
                     }
                 }
-                temp = temp >> 1;
-                k_index++;
+                p_index++;
+                setItem >>= 1;
             }
         }
-    }while(!added);
+    }while(added);
+
     return J;
 }
-
 setItem gotoFunction(setItem *st1, enum labelTok token){
+
     return NULL;
 }
- */

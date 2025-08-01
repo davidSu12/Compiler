@@ -26,7 +26,5 @@
 
 int main(int argc, char ** argv) {
 
-
-    testSetItem3();
     return 0;
 }

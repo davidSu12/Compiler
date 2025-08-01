@@ -12,8 +12,12 @@
 #include TOKEN_PATH
 
 
-
-setItem closure(setItem *st1);
+/**
+ *
+ * @param st1
+ * @return
+ */
+setItem * closure(setItem *st1);
 setItem gotoFunction(setItem *st1, enum labelTok token);
 
 
