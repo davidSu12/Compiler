@@ -21,7 +21,7 @@ setItem * closure(setItem *st1){
                 if(isInSet){
                     if(p_index < listProduction[production].longitud_body){
 
-                        enum labelTok nextToken = listProduction[production].body[p_index];
+                        token nextToken = listProduction[production].body[p_index];
                         int index = 0;
 
                         if(IS_VARIABLE(nextToken)) {

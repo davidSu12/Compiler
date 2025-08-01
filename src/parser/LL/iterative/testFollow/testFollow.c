@@ -1,7 +1,7 @@
 #include "testFollow.h"
 
 
-static void auxtestFollow(setLabel t, enum labelTok label){
+static void auxtestFollow(setLabel t, token label){
     for(int i = 0; i < MAX_LEN_SET; i++){
         if(i == label){
             assert(t[i]);

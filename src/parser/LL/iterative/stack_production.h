@@ -6,7 +6,7 @@
 #include TOP_DOWN_ITERATIVE_STACKPRODUCTION_LIBRARIES_PATH
 
 typedef struct nodeProduction{
-    enum labelTok item;
+    token item;
     struct nodeProduction *next;
 }nodeProduction;
 
@@ -24,7 +24,7 @@ bool pushProduction(production el);
 /**
  * @return element that is in the top of the stack
  */
-enum labelTok peekLabel();
+token peekLabel();
 
 /**
  * @return true if the stack is empty, false otherwise
@@ -42,7 +42,7 @@ void popLabel();
  * @param label label to push on the stack
  * @return returns true if everything goes right, else otherwise
  */
-bool pushLabel(enum labelTok label);
+bool pushLabel(token label);
 
 
 void printStack();

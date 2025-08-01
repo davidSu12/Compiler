@@ -102,7 +102,7 @@ void testParser(){
 };
 void test(){
 
-    token m;
+    nodeToken m;
     initBuffer();
 
     while((m = getNextToken()) != NULL){

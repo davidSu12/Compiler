@@ -17,27 +17,27 @@
  * @param longitud_array length of the body of the productionn
  * @return the newly created production
  */
-production *createProduction(enum labelTok head, enum labelTok body[], int longitud_array);
+production *createProduction(token head, token body[], int longitud_array);
 
 
 /**
  * @param head
  * @return the set first of the grammar symbol head
  */
-setLabel first(enum labelTok head);
+setLabel first(token head);
 
 /**
  * @param head
  * @return just looks if there's some production A -> emptyString.
  * If there is, then it returns true. If there's not then just returns false
  */
-bool derivesEmptyString(enum labelTok head);
+bool derivesEmptyString(token head);
 
 /**
  * @param head
  * @return the set follow of the grammar symbol head
  */
-setLabel follow(enum labelTok head);
+setLabel follow(token head);
 
 /**
  * inits the parse table with the necessary info to come up with the parsing

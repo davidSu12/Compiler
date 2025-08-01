@@ -3,7 +3,7 @@
 void testInsertion(void){
 
     production *temp = createProduction(EXPRP,
-                                        (enum labelTok []){PLUS, TERM, EXPRP},
+                                        (token []){PLUS, TERM, EXPRP},
                                         3);
     assert(temp -> head == EXPRP);
     assert(temp -> body[0] == PLUS);
@@ -16,7 +16,7 @@ void testInsertion(void){
 }
 void testPop(void){
     production *temp = createProduction(EXPRP,
-                                        (enum labelTok []){PLUS, TERM, EXPRP},
+                                        (token []){PLUS, TERM, EXPRP},
                                         3);
     assert(temp -> head == EXPRP);
     assert(temp -> body[0] == PLUS);

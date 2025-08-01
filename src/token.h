@@ -26,4 +26,6 @@ enum labelTok{
 };
 
 
+typedef enum labelTok token;
+
 #endif

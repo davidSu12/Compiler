@@ -7,8 +7,7 @@
 #include TOKEN_PATH
 #include TYPE_PRODUCTION_PATH
 
-
-
 extern production listProduction[];
+
 
 #endif

@@ -8,7 +8,7 @@ static void SyntaxError(){
     exit(EXIT_FAILURE);
 }
 
-production * createProduction(enum labelTok head, enum labelTok body[], int longitud_array){
+production * createProduction(token head, token body[], int longitud_array){
 
     production * temp = malloc(sizeof(struct production));
     if(!temp){
@@ -17,7 +17,7 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
         exit(EXIT_FAILURE);
     }
     temp -> head = head;
-    temp -> body = malloc(sizeof(enum labelTok) * longitud_array);
+    temp -> body = malloc(sizeof(token) * longitud_array);
     if(!(temp -> body)){
         fprintf(stderr, "An error has ocurred"
                         " while allocating memory for body of production\n");
@@ -25,7 +25,7 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
         exit(EXIT_FAILURE);
     }
 
-    memcpy(temp -> body, body, sizeof(enum labelTok) * longitud_array);
+    memcpy(temp -> body, body, sizeof(token) * longitud_array);
 
     for(int i = 0; i< longitud_array; i++){
         assert(temp -> body[i] == body[i]);
@@ -35,7 +35,7 @@ production * createProduction(enum labelTok head, enum labelTok body[], int long
 }
 
 
-bool derivesEmptyString(enum labelTok head){
+bool derivesEmptyString(token head){
     if(IS_TERMINAL(head)){
         return false;
     }else{
@@ -59,7 +59,7 @@ bool derivesEmptyString(enum labelTok head){
     }
 }
 
-static void auxFirst(enum labelTok head, setLabel *t){
+static void auxFirst(token head, setLabel *t){
 
 
     if(IS_TERMINAL(head)){
@@ -98,7 +98,7 @@ static void auxFirst(enum labelTok head, setLabel *t){
 
 
 
-static void auxFollow(enum labelTok head, setLabel *t){
+static void auxFollow(token head, setLabel *t){
     int i = 0;
     if(head == EXPR){
         if(!addLabel($, t)){
@@ -136,14 +136,14 @@ static void auxFollow(enum labelTok head, setLabel *t){
     }
 
 }
-setLabel first(enum labelTok head){
+setLabel first(token head){
     setLabel t;
     createEmptySetLabel(&t);
     auxFirst(head, &t);
     return t;
 }
 
-setLabel follow(enum labelTok head){
+setLabel follow(token head){
     setLabel t;
     createEmptySetLabel(&t);
     auxFollow(head, &t);
@@ -168,7 +168,7 @@ void initParseTable(void){
 
         for(int j = TERMINAL_INDEX(FIRST_TERMINAL); j <= TERMINAL_INDEX(LAST_TERMINAL); j++){
             //paso1
-            if(searchLabel( (enum labelTok)j, temp )){
+            if(searchLabel( (token)j, temp )){
                 parseTable[VARIABLE_INDEX(listProduction[i].head)][j] = &listProduction[i];
 
             }
@@ -176,7 +176,7 @@ void initParseTable(void){
             //paso2
             if(searchLabel(EMPTY, temp)) {
                 for (int k = TERMINAL_INDEX(FIRST_TERMINAL); k <= TERMINAL_INDEX(LAST_TERMINAL); k++) {
-                    if(searchLabel((enum labelTok) k, tempFollow)) {
+                    if(searchLabel((token) k, tempFollow)) {
                         parseTable[VARIABLE_INDEX(listProduction[i].head)][k] = &listProduction[i];
                     }
                 }
@@ -222,7 +222,7 @@ bool parse(){
 
     initParseTable();
     createEmptyStackProd();
-    token tok = getNextToken();
+    nodeToken tok = getNextToken();
 
     if(!pushLabel(EXPR)){
         fprintf(stderr, "An error has ocurred while doing "
@@ -255,7 +255,7 @@ bool parse(){
             SyntaxError();
         }else if(parseTable[VARIABLE_INDEX(peekLabel())][TERMINAL_INDEX(tok -> label)] != NULL){
 
-            enum labelTok temp = peekLabel();
+            token temp = peekLabel();
             popLabel();
             if(!pushProduction(*parseTable[VARIABLE_INDEX(temp)][TERMINAL_INDEX(tok -> label)])){
                 fprintf(stderr, "An error has ocurred while pushing production on parse function");

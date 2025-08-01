@@ -4,7 +4,7 @@
 
 static stack st = NULL;
 
-bool insertElement(token elemento){
+bool insertElement(nodeToken elemento){
 
     stack temp = malloc(sizeof(struct nodeStack));
     if(!temp){
@@ -17,8 +17,8 @@ bool insertElement(token elemento){
     return true;
 
 }
-token pop(){
-    stack temp; token tokTemp;
+nodeToken pop(){
+    stack temp; nodeToken tokTemp;
     temp = st;
     tokTemp = st -> elemento;
     st = st -> next;
@@ -26,7 +26,7 @@ token pop(){
     assert(tokTemp != NULL);
     return tokTemp;
 }
-token peek(){
+nodeToken peek(){
     if(isEmptyStack()){
         fprintf(stderr, "stack is empty\n");
         return NULL;

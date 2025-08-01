@@ -13,9 +13,9 @@ typedef bool * setLabel;
 
 void createEmptySetLabel(setLabel *set);
 bool isEmptySetLabel( setLabel set);
-bool addLabel(enum labelTok label, setLabel * set);
-void deleteLabel(enum labelTok label, setLabel * set);
-bool searchLabel(enum labelTok label, setLabel set);
+bool addLabel(token label, setLabel * set);
+void deleteLabel(token label, setLabel * set);
+bool searchLabel(token label, setLabel set);
 void printSetLabel(setLabel t);
 setLabel *unionSet(setLabel *set1, setLabel *set2);
 void deleteLabelSet(setLabel *set);

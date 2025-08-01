@@ -4,8 +4,8 @@
 
 #include "paths.h"
 
-#include TYPE_PRODUCTION_PATH"typeProduction.h"
-#include LEXER_MACROS_PATH"lexerMacros.h"
+#include TYPE_PRODUCTION_PATH
+#include LEXER_MACROS_PATH
 
 extern production *parseTable[NUM_VARIABLES_TOP_DOWN][NUM_TERMINALS];
 

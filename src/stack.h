@@ -7,7 +7,7 @@
 
 
 struct nodeStack{
-    token elemento;
+    nodeToken elemento;
     struct nodeStack *next;
 };
 
@@ -15,9 +15,9 @@ typedef struct nodeStack * stack;
 
 
 void createEmptyStack();
-bool insertElement(token elemento);
-token pop();
-token peek();
+bool insertElement(nodeToken elemento);
+nodeToken pop();
+nodeToken peek();
 bool isEmptyStack();
 
 

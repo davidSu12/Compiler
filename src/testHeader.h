@@ -2,15 +2,15 @@
 #define TESTHEADER_H
 
 #ifdef TEST_FIRST_FUNCTION
-#include "parser/LL/iterative/testFirst/testFirst.h"
+#include TOP_DOWN_ITERATIVE_TEST_FIRST
 #endif //TEST_FIRST_FUNCTION
 
 #ifdef TEST_FOLLOW_FUNCTION
-#include "parser/LL/iterative/testFollow/testFollow.h"
+#include TOP_DOWN_ITERATIVE_TEST_FOLLOW
 #endif //TEST_FOLLOW_FUNCTION
 
 #ifdef TEST_PARSE_TABLE_FUNCTION
-#include "parser/LL/iterative/testParseTable/testParseTable.h"
+#include TOP_DOWN_ITERATIVE_TEST_PARSETABLE
 #endif //TEST_PARSE_TABLE_FUNCTION
 
 #endif

@@ -5,7 +5,7 @@
 static stackProduction stackProd;
 
 
-bool pushLabel(enum labelTok label){
+bool pushLabel(token label){
     nodeProduction * temp = malloc(sizeof(struct nodeProduction));
     if(!temp){
         fprintf(stderr, "An error has ocurred while"
@@ -21,7 +21,7 @@ bool pushLabel(enum labelTok label){
 
 bool pushProduction(production el){
     for(int i = (el.longitud_body)-1; i >= 0; i--){
-        enum labelTok temp = el.body[i];
+        token temp = el.body[i];
         if(!pushLabel(temp)){
             int j = (el.longitud_body) - i;
             while(j != 0){
@@ -40,7 +40,7 @@ bool pushProduction(production el){
     return true;
 }
 
-enum labelTok peekLabel(){
+token peekLabel(){
     if(isEmptyStack()){
         fprintf(stderr, "Stack of labels is empty\n");
         return -1;

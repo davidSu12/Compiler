@@ -4,8 +4,6 @@
 
 //#define TEST_CLOSURE_FUNCTION
 
-
-#define TOP_DOWN_IT
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
@@ -34,7 +32,6 @@
 int main(int argc, char ** argv) {
 
 
-    initBuffer();
-    parse();
+
     return 0;
 }

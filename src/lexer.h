@@ -17,8 +17,8 @@ typedef struct node{
 }node;
 
 
-typedef struct node * token;
-typedef token ListToken;
+typedef struct node * nodeToken;
+typedef nodeToken ListToken;
 
 
 /**
@@ -43,14 +43,14 @@ void printBuffer();
  * @param item
  * @return the corresponding char for item
  */
-char simbToChar(enum labelTok item);
+char simbToChar(token item);
 
 
 /**
  * function tha returns the next token in the buffer
  * @return the next token from the buffer
  */
-token getNextToken(void);
+nodeToken getNextToken(void);
 
 
 /**

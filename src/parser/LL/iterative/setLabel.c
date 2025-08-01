@@ -11,7 +11,7 @@ void createEmptySetLabel(setLabel *set){
 bool isEmptySetLabel(setLabel set){
     return set == NULL;
 }
-bool addLabel(enum labelTok label, setLabel * set){
+bool addLabel(token label, setLabel * set){
     if(isEmptySetLabel(*set)){
         fprintf(stderr, "Set not initialized");
         exit(EXIT_FAILURE);
@@ -19,13 +19,13 @@ bool addLabel(enum labelTok label, setLabel * set){
     (*set)[label] = true;
     return true;
 }
-void deleteLabel(enum labelTok label, setLabel * set){
+void deleteLabel(token label, setLabel * set){
     if(isEmptySetLabel(*set)){
         return;
     }
     (*set)[label] = false;
 }
-bool searchLabel(enum labelTok label, setLabel set){
+bool searchLabel(token label, setLabel set){
     if(isEmptySetLabel(set)){
         return false;
     }

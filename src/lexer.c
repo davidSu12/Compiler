@@ -28,7 +28,7 @@ void printBuffer(){
 }
 
 
-char simbToChar(const enum labelTok m){
+char simbToChar(const token m){
 
     switch(m){
         case PLUS:return '+';break;
@@ -39,13 +39,13 @@ char simbToChar(const enum labelTok m){
         case RIGHTPAR:return ')';break;
     }
 }
-token getNextToken(){
+nodeToken getNextToken(){
 
 
     if(*currPosition == END || *currPosition == '\n'){
         return NULL;
     }
-    token temp = malloc(sizeof(struct node));
+    nodeToken temp = malloc(sizeof(struct node));
     if(!temp){
         fprintf(stderr, "Error in getNextToken (No more memory available)\n");
         exit(EXIT_FAILURE);
@@ -97,7 +97,7 @@ token getNextToken(){
 
 
 void deleteListToken(){
-    token temp;
+    nodeToken temp;
 
     if(isEmptyList()){
         return;

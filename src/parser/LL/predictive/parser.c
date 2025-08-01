@@ -1,7 +1,7 @@
 #include "parser.h"
 
 
-static token lookahead;
+static nodeToken lookahead;
 
 /**
  * auxiliar function to raise a syntax error
@@ -111,7 +111,7 @@ void factor(void){
         SyntaxError();
     }
 }
-void match(enum labelTok simbolo){
+void match(token simbolo){
     if(lookahead == NULL){
         SyntaxError();
     }
