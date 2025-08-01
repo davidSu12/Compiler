@@ -1,10 +1,9 @@
 #ifndef TESTSETITEMS_H
 #define TESTSETITEMS_H
 
-#define SET_ITEMS_PATH "parser/LR/setItems.h"
-
+#include "paths.h"
 #include <assert.h>
-#include SET_ITEMS_PATH
+#include BOTTOM_UP_SETITEMS_PATH
 
 void testSetItem1(void);
 void testSetItem2(void);
