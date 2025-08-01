@@ -2,6 +2,7 @@
 #define TOKEN_H
 
 enum labelTok{
+    //unique terminals
     NUM,
     LEFTPAR,
     RIGHTPAR,
@@ -9,11 +10,17 @@ enum labelTok{
     MINUS,
     DOT,
     DIV,
+
+    //unique non terminals
     EXPR,
-    EXPRP,
     TERM,
-    TERMP,
     FACTOR,
+
+    //non terminals for top down parsing
+    EXPRP,
+    TERMP,
+
+    //special symbols
     EMPTY,
     $
 };

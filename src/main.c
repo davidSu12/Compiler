@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "lexer.h"
+#include "paths.h"
+
+//#define TEST_CLOSURE_FUNCTION
 
 
-#define TEST_CLOSURE_FUNCTION
-
+#define TOP_DOWN_IT
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
@@ -12,11 +14,11 @@
 #include "parser/LL/iterative/parser.h"
 #include "parser/LL/iterative/stack_production.h"
 #include "parser/LL/iterative/testStackProduction/testStackProduction.h"
-#include "globalVar/parseTable.h"
+#include "globalVar/listProduction/topDown/parseTable.h"
 #endif //TOP_DOWN_IT
 
 
-#define BOTTOM_UP
+
 #ifdef BOTTOM_UP
 #include "parser/LR/testSetItems/testSetItems.h"
 #endif
@@ -31,6 +33,8 @@
 
 int main(int argc, char ** argv) {
 
-    testClosure1();
+
+    initBuffer();
+    parse();
     return 0;
 }

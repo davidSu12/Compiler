@@ -2,8 +2,8 @@
 #define TESTFIRST_H
 
 
-#define PATH_PARSER "parser/LL/iterative/parser.h"
-#include PATH_PARSER
+#include "paths.h"
+#include TOP_DOWN_ITERATIVE_PARSER_PATH
 
 void test1First(void);
 void test2First(void);

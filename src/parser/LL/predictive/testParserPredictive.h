@@ -1,9 +1,9 @@
 #ifndef TESTPARSERPREDICTIVE_H
 #define TESTPARSERPREDICTIVE_H
 
-#define LEXER_PATH "lexer.h"
+#include "paths.h"
 #include LEXER_PATH
-#include "parser.h"
+#include TOP_DOWN_PREDICTIVE_PARSER_PATH
 
 void test();
 void ParserGoodCasesTest();

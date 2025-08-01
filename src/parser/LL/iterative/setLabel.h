@@ -2,10 +2,12 @@
 #define SETLABEL_H
 
 
-#define LEXER_INCLUDE_PATH "lexer.h"
-#include LEXER_INCLUDE_PATH
+#include "paths.h"
 
-#define MAX_LEN_SET (LAST_VARIABLE)
+#include LEXER_PATH
+#include TOKEN_PATH
+
+#define MAX_LEN_SET (LAST_SYMBOL)
 
 typedef bool * setLabel;
 

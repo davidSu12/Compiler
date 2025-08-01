@@ -1,19 +1,13 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#define ITEMS_PATH "parser/LR/items.h"
-#define SET_ITEMS_PATH "parser/LR/setItems.h"
+#include "paths.h"
 
-#define LIST_PRODUCTION_PATH "globalVar/listProduction.h"
-
-#define TOKEN_PATH "token.h"
-#define LEXER_HEADER_PATH "lexerMacros.h"
-
-#include ITEMS_PATH
-#include SET_ITEMS_PATH
-#include LIST_PRODUCTION_PATH
+#include BOTTOM_UP_ITEMS_PATH
+#include BOTTOM_UP_SETITEMS_PATH
+#include TOP_DOWN_LISTPRODUCTION_PATH
 #include TOKEN_PATH
-#include LEXER_HEADER_PATH
+#include LEXER_MACROS_PATH
 
 
 /*

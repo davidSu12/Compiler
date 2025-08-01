@@ -1,11 +1,9 @@
 #ifndef STACK_PRODUCTION_H
 #define STACK_PRODUCTION_H
 
-#include "typeProduction.h"
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
+#include "paths.h"
+#include TYPE_PRODUCTION_PATH
+#include TOP_DOWN_ITERATIVE_STACKPRODUCTION_LIBRARIES_PATH
 
 typedef struct nodeProduction{
     enum labelTok item;

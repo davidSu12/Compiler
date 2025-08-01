@@ -1,8 +1,9 @@
 #ifndef LEXER_H
 #define LEXER_H
 
-#include "lexerMacros.h"
-#include "token.h"
+#include "paths.h"
+#include LEXER_MACROS_PATH
+#include TOKEN_PATH
 
 
 typedef struct node{

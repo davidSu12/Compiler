@@ -1,8 +1,7 @@
-#include "./parser.h"
+#include "parser.h"
 
 
-#include PATH_PARSE_TABLE
-#include PATH_LIST_PRODUCTION
+
 
 static void SyntaxError(){
     fprintf(stderr, "Syntax error\n");

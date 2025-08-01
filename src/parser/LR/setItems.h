@@ -2,12 +2,13 @@
 #define SETITEMS_H
 
 
+#include "paths.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "items.h"
 #include <assert.h>
+#include BOTTOM_UP_ITEMS_PATH
 
 /**
  * Important macro that

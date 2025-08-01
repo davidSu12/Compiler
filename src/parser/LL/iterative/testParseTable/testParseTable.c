@@ -1,10 +1,6 @@
 #include "testParseTable.h"
 
-#define PATH_PARSER "parser/LL/iterative/parser.h"
-#include PATH_PARSER
 
-#include PATH_LIST_PRODUCTION
-#include PATH_PARSE_TABLE
 
 
 void testParseTable1(void){
