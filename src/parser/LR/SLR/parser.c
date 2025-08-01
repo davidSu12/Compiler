@@ -10,29 +10,32 @@ setItem * closure(setItem *st1){
     do{
         added = false;
         for(temp = *J; temp != NULL; temp = temp -> next){
-            //tenemos que mirar cada conjunto por separado
+
             item temp1 = temp -> data;
             uint32_t production = temp1.production;
             uint32_t setItem = temp1.item;
             int p_index = 0;
+
             while(setItem != 0){
                 uint32_t isInSet = setItem & 1U;
                 if(isInSet){
-
                     if(p_index < listProduction[production].longitud_body){
-                        enum labelTok nextToken = listProduction[production].body[p_index];
 
+                        enum labelTok nextToken = listProduction[production].body[p_index];
                         int index = 0;
-                        while(listProduction[index].head != EMPTY){
-                            if(listProduction[index].head == nextToken){
-                                added = addItem(J,(struct item){index, 0});
-                                if(!added){
-                                    fprintf(stderr, "An error has ocurred "
-                                                    "while adding item to set item in closure");
-                                    exit(EXIT_FAILURE);
+
+                        if(IS_VARIABLE(nextToken)) {
+                            while (listProduction[index].head != EMPTY) {
+                                if (listProduction[index].head == nextToken) {
+                                    added = addItem(J, (struct item) {index, 0});
+                                    if (!added) {
+                                        fprintf(stderr, "An error has ocurred "
+                                                        "while adding item to set item in closure");
+                                        exit(EXIT_FAILURE);
+                                    }
                                 }
+                                index++;
                             }
-                            index++;
                         }
 
                     }

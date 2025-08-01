@@ -2,6 +2,7 @@
 #include "lexer.h"
 
 
+#define TEST_CLOSURE_FUNCTION
 
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
@@ -20,11 +21,16 @@
 #include "parser/LR/testSetItems/testSetItems.h"
 #endif
 
+#ifdef TEST_CLOSURE_FUNCTION
+#include "parser/LR/SLR/testClosure/testClosureFunction.h"
+#endif
+
 
 #include "testHeader.h"
 
 
 int main(int argc, char ** argv) {
 
+    testClosure1();
     return 0;
 }
