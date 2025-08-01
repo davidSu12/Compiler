@@ -17,6 +17,8 @@
 #endif //TOP_DOWN_IT
 
 
+#define BOTTOM_UP
+#define TEST_CLOSURE_FUNCTION
 
 #ifdef BOTTOM_UP
 #include "parser/LR/testSetItems/testSetItems.h"
@@ -31,6 +33,8 @@
 
 
 int main(int argc, char ** argv) {
+
+    testClosure1();
 
     return 0;
 }

@@ -6,10 +6,10 @@ setItem * closure(setItem *st1){
     setItem *J = st1;
     bool added;
     NodeSetItem *temp;
-
+    temp = *J;
     do{
         added = false;
-        for(temp = *J; temp != NULL; temp = temp -> next){
+        for(;temp != NULL; temp = temp -> next){
 
             item temp1 = temp -> data;
             uint32_t production = temp1.production;
@@ -19,8 +19,8 @@ setItem * closure(setItem *st1){
             while(setItem != 0){
                 uint32_t isInSet = setItem & 1U;
                 if(isInSet){
-                    if(p_index < listProduction[production].longitud_body){
 
+                    if(p_index < listProduction[production].longitud_body){
                         token nextToken = listProduction[production].body[p_index];
                         int index = 0;
 
