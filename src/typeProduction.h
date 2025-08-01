@@ -5,8 +5,8 @@
 #include TOKEN_PATH
 
 typedef struct production{
-    enum labelTok head;
-    enum labelTok * body;
+    token head;
+    token * body;
     int longitud_body;
 }production;
 

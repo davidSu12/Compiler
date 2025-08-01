@@ -8,6 +8,7 @@
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
 
+#define TOP_DOWN_IT
 #ifdef TOP_DOWN_IT
 #include "parser/LL/iterative/parser.h"
 #include "parser/LL/iterative/stack_production.h"
@@ -31,7 +32,7 @@
 
 int main(int argc, char ** argv) {
 
-
-
+    initBuffer();
+    parse();
     return 0;
 }
