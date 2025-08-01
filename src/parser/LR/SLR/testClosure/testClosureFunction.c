@@ -1,12 +1,4 @@
 #include "testClosureFunction.h"
-#include <assert.h>
-#include <stdio.h>
-
-#define PATH_SET_ITEMS "parser/LR/setItems.h"
-#define PATH_PARSER_SLR "parser/LR/SLR/parser.h"
-
-#include PATH_SET_ITEMS
-#include PATH_PARSER_SLR
 
 void testClosure1(void){
 

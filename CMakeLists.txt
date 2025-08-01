@@ -33,6 +33,7 @@ else()
             src/parser/LR/SLR/parser.h
             src/parser/LR/SLR/testClosure/testClosureFunction.h
             src/parser/LR/SLR/testClosure/testClosureFunction.c
+            src/parser/LR/SLR/testClosure/testClosureFunction.h
     )
 endif()
 
