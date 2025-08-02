@@ -34,6 +34,8 @@ else()
             src/parser/LR/SLR/testClosure/testClosureFunction.h
             src/parser/LR/SLR/testClosure/testClosureFunction.c
             src/parser/LR/SLR/testClosure/testClosureFunction.h
+            src/parser/LR/superSetItems.h
+            src/parser/LR/superSetItem.c
     )
 endif()
 

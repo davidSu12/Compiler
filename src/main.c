@@ -34,9 +34,6 @@
 
 int main(int argc, char ** argv) {
 
-    testClosure1();
-    testClosure2();
-    testClosure3();
 
     return 0;
 }
