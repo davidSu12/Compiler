@@ -40,6 +40,10 @@ else()
             src/parser/LR/testSuperSetItems/testSuperSetItems.c
             src/parser/LR/SLR/testGoto/testGoto.h
             src/parser/LR/SLR/testGoto/testGoto.c
+            src/parser/LR/CanonicalLR/parser.h
+            src/parser/LR/CanonicalLR/parser.c
+            src/parser/LR/SLR/testCanonical/testCanonical.h
+            src/parser/LR/SLR/testCanonical/testCanonical.c
     )
 endif()
 

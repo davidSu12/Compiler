@@ -25,6 +25,8 @@
 #define BOTTOM_UP_SUPER_SET_ITEMS "parser/LR/superSetItems.h"
 #define BOTTOM_UP_TEST_SUPER_SET_ITEMS "parser/LR/testSuperSetItems/testSuperSetItems.h"
 #define BOTTOM_UP_TEST_GOTO_FUNCTION_PATH "parser/LR/SLR/testGoto/testGoto.h"
+#define BOTTOM_UP_CANONICAL_PARSER_PATH "parser/LR/CanonicalLR/parser.h"
+
 
 
 #endif

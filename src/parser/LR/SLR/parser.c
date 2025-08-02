@@ -88,3 +88,14 @@ setItem * gotoFunction(setItem *st1, token tok){
 
     return closure(J_aux);
 }
+
+superSetItem *canonicalSet(void){
+
+    superSetItem *superSet = malloc(sizeof(superSetItem));
+    if(superSet == NULL){
+        fprintf(stderr, "An error has ocurred while allocating memory for superSetItem in canonicalSet");
+        exit(EXIT_FAILURE);
+    }
+
+    return NULL;
+}

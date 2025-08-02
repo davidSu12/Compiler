@@ -13,6 +13,7 @@
 
 setItem * closure(setItem *st1);
 setItem * gotoFunction(setItem *st1, token tok);
+superSetItem * canonicalSet(void);
 
 
 
