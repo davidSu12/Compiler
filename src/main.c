@@ -29,9 +29,13 @@
 #endif
 
 
-#define TEST_SUPER_SET_ITEM
 #ifdef TEST_SUPER_SET_ITEM
 #include BOTTOM_UP_TEST_SUPER_SET_ITEMS
+#endif
+
+#define TEST_GOTO_FUNCTION
+#ifdef TEST_GOTO_FUNCTION
+#include BOTTOM_UP_TEST_GOTO_FUNCTION_PATH
 #endif
 
 #include "testHeader.h"
@@ -40,7 +44,7 @@
 int main(int argc, char ** argv) {
 
 
-
-
+    //testGoto1();
+    testGoto2();
     return 0;
 }

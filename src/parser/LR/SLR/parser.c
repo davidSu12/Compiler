@@ -48,9 +48,16 @@ setItem * closure(setItem *st1){
 
     return J;
 }
-setItem* gotoFunction(setItem *st1, token tok){
-    setItem J_aux;
+
+setItem * gotoFunction(setItem *st1, token tok){
+
+    setItem *J_aux = malloc(sizeof(setItem));
+    if(J_aux == NULL){
+        fprintf(stderr, "An error has ocurred while allocating memory for J_aux in gotoFunction");
+        exit(EXIT_FAILURE);
+    }
     setItem temp;
+    createEmptySetItem(J_aux);
 
     for(temp = *st1; temp != NULL; temp = temp -> next){
         item it = temp -> data;
@@ -65,7 +72,7 @@ setItem* gotoFunction(setItem *st1, token tok){
                 if(k_index < listProduction[production].longitud_body){
                     token nextTok = listProduction[production].body[k_index];
                     if(nextTok == tok){
-                        if(!addItem(&J_aux, (struct item){production, k_index+1})){
+                        if(!addItem(J_aux, (struct item){production, k_index+1})){
                             fprintf(stderr, "An error has ocurred while adding item in gotoFunction");
                             exit(EXIT_FAILURE);
                         }
@@ -79,5 +86,5 @@ setItem* gotoFunction(setItem *st1, token tok){
 
     }
 
-    return closure(&J_aux);
+    return closure(J_aux);
 }

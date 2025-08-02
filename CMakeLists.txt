@@ -38,6 +38,8 @@ else()
             src/parser/LR/superSetItem.c
             src/parser/LR/testSuperSetItems/testSuperSetItems.h
             src/parser/LR/testSuperSetItems/testSuperSetItems.c
+            src/parser/LR/SLR/testGoto/testGoto.h
+            src/parser/LR/SLR/testGoto/testGoto.c
     )
 endif()
 
