@@ -48,7 +48,8 @@ setItem * closure(setItem *st1){
 
     return J;
 }
-setItem gotoFunction(setItem *st1, enum labelTok token){
+setItem gotoFunction(setItem *st1, token tok){
 
+    
     return NULL;
 }
