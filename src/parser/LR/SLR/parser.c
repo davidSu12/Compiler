@@ -48,8 +48,36 @@ setItem * closure(setItem *st1){
 
     return J;
 }
-setItem gotoFunction(setItem *st1, token tok){
+setItem* gotoFunction(setItem *st1, token tok){
+    setItem J_aux;
+    setItem temp;
 
-    
-    return NULL;
+    for(temp = *st1; temp != NULL; temp = temp -> next){
+        item it = temp -> data;
+        uint32_t production = it.production;
+        uint32_t itemSet = it.item;
+        int k_index = 0;
+
+        while(itemSet != 0){
+            uint32_t isInSet = (itemSet & 1U);
+            if(isInSet){
+                //aqui comprobamos si estamos ante esa clase de token
+                if(k_index < listProduction[production].longitud_body){
+                    token nextTok = listProduction[production].body[k_index];
+                    if(nextTok == tok){
+                        if(!addItem(&J_aux, (struct item){production, k_index+1})){
+                            fprintf(stderr, "An error has ocurred while adding item in gotoFunction");
+                            exit(EXIT_FAILURE);
+                        }
+                    }
+                }
+            }
+            k_index++;
+            itemSet >>= 1;
+
+        }
+
+    }
+
+    return closure(&J_aux);
 }

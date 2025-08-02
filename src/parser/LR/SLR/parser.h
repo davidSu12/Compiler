@@ -8,16 +8,12 @@
 #include TOP_DOWN_LISTPRODUCTION_PATH
 #include TOKEN_PATH
 #include LEXER_MACROS_PATH
+#include BOTTOM_UP_TEST_SUPER_SET_ITEMS
 
 
-/*
- * We may do a better approach
- * on listProduction by turning this list
- * into a hashtable for the heads of the production
- * than looking individually for each head
- */
 setItem * closure(setItem *st1);
-setItem gotoFunction(setItem *st1, token tok);
+setItem * gotoFunction(setItem *st1, token tok);
+
 
 
 #endif
