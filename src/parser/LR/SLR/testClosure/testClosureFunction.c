@@ -7,8 +7,6 @@ void testClosure1(void){
     addItem(&st1, (struct item){0,0});
 
     setItem *closure_set = closure(&st1);
-    //its the initial set so all the productions with the dots at the first place are added
-
     NodeSetItem *temp = *closure_set;
 
     assert(temp -> data.production == 0);

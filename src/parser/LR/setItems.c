@@ -121,6 +121,10 @@ void deleteSetItem(setItem *st1){
 
     NodeSetItem *temp = *st1;
 
+    if(isEmptySetItem(*st1)){
+        return;
+    }
+
     while(temp != NULL){
         *st1 = (*st1) -> next;
         free(temp);
@@ -226,9 +230,14 @@ setItem * unionSetItems(setItem *st1, setItem *st2){
 }
 
 void printSetItem(setItem st1, void (*viewBinary)(uint32_t d)){
-    NodeSetItem *temp1;
+
+    NodeSetItem *temp1 = st1;
+
+    if(st1 == NULL){
+        return;
+    }
     if(viewBinary == NULL){
-        for(temp1 = st1; temp1 != NULL; temp1 = temp1 -> next){
+        for(; temp1 != NULL; temp1 = temp1 -> next){
             printf("production: %d\nitemSet: %d\n", temp1 -> data.production, temp1->data.item);
         }
     }else{
