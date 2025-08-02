@@ -23,5 +23,6 @@
 #define BOTTOM_UP_SETITEMS_PATH "parser/LR/setItems.h"
 #define BOTTOM_UP_PARSER_SLR_PATH "parser/LR/SLR/parser.h"
 #define BOTTOM_UP_SUPER_SET_ITEMS "parser/LR/superSetItems.h"
+#define BOTTOM_UP_TEST_SUPER_SET_ITEMS "parser/LR/testSuperSetItems/testSuperSetItems.h"
 
 #endif

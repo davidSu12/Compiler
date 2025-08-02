@@ -29,11 +29,18 @@
 #endif
 
 
+#define TEST_SUPER_SET_ITEM
+#ifdef TEST_SUPER_SET_ITEM
+#include BOTTOM_UP_TEST_SUPER_SET_ITEMS
+#endif
+
 #include "testHeader.h"
 
 
 int main(int argc, char ** argv) {
 
+    testSuperSetItems1();
+    testSuperSetItems2();
 
     return 0;
 }
