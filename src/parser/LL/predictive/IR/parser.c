@@ -1,7 +1,10 @@
 #include "parser.h"
 
+#define MAX_LEN_LABEL 4
 
 static nodeToken lookahead;
+static astTree *EXPRIN;
+static nodeLeaf *EXPRIN2;
 
 /**
  * auxiliar function to raise a syntax error
@@ -25,7 +28,6 @@ bool parse(void){
 }
 
 void expr(void){
-
     term();
     exprP();
 }
@@ -78,7 +80,6 @@ void factor(void){
         return;
     }
     if(lookahead -> label == NUM){
-
         match(NUM);
 
     }else if(lookahead -> label == LEFTPAR){

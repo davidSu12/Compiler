@@ -8,6 +8,7 @@ static char buff[MAX_LEN_BUFF];
 static char * lexemeBegin;
 static char * currPosition;
 static ListToken list;
+static nodeToken currentToken;
 
 
 
@@ -92,6 +93,7 @@ nodeToken getNextToken(){
         lexemeBegin = currPosition;
     }
 
+    currentToken = temp;
     return temp;
 }
 
@@ -115,6 +117,10 @@ void deleteListToken(){
 }
 
 
-bool isEmptyList(){
+bool isEmptyList(void){
     return list == NULL;
+}
+
+nodeToken getCurrentToken(void){
+    return currentToken;
 }

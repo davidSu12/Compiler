@@ -65,4 +65,10 @@ void deleteListToken(void);
  */
 bool isEmptyList(void);
 
+
+/**
+ * @return returns the last token returned
+ */
+nodeToken getCurrentToken(void);
+
 #endif //LEXER_H

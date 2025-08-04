@@ -7,17 +7,14 @@ set(CMAKE_C_STANDARD 11)
 option(USE_TOPDOWN "top down" ON)
 
 
+
 if (USE_TOPDOWN)
     set(SRC
-            src/globalVar/listProduction/topDown/listProduction.c
-            src/parser/LL/iterative/parser.c
-            src/parser/LL/iterative/stack_production.c
-            src/parser/LL/iterative/testStackProduction/testStackProduction.c
-            src/parser/LL/iterative/setLabel.c
-            src/parser/LL/iterative/testFirst/testFirst.c
-            src/parser/LL/iterative/testFollow/testFollow.c
-            src/globalVar/listProduction/topDown/parseTable.c
-            src/parser/LL/iterative/testParseTable/testParseTable.c
+            src/parser/LL/predictive/parser.c
+            src/parser/LL/predictive/IR/parser.h
+            src/parser/LL/predictive/IR/parser.c
+            src/parser/LL/predictive/IR/ast.h
+            src/parser/LL/predictive/IR/ast.c
     )
 else()
 

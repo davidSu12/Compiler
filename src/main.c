@@ -4,6 +4,8 @@
 
 //#define TEST_CLOSURE_FUNCTION
 
+#define TOP_DOWN_PR
+
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
@@ -17,7 +19,6 @@
 #endif //TOP_DOWN_IT
 
 
-#define BOTTOM_UP
 #define TEST_CLOSURE_FUNCTION
 
 #ifdef BOTTOM_UP
@@ -33,7 +34,7 @@
 #include BOTTOM_UP_TEST_SUPER_SET_ITEMS
 #endif
 
-#define TEST_GOTO_FUNCTION
+
 #ifdef TEST_GOTO_FUNCTION
 #include BOTTOM_UP_TEST_GOTO_FUNCTION_PATH
 #endif
@@ -43,8 +44,8 @@
 
 int main(int argc, char ** argv) {
 
+    initBuffer();
+    assert(parse());
 
-    //testGoto1();
-    testGoto2();
     return 0;
 }
