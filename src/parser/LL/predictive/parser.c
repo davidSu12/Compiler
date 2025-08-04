@@ -16,6 +16,7 @@ void initParser(){
 }
 
 bool parse(void){
+    initParser();
     expr();
     if(lookahead == NULL){
         return true;

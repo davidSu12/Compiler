@@ -22,24 +22,16 @@ typedef enum typeNode{
 
 
 typedef struct nodeTree{
+
     typeNode type;
+
     union{
         token operation;
         char * lexeme;
     }entry;
 
-    typeEntry entryLeft;
-    typeEntry entryRight;
-
-    union{
-        struct nodeLeaf * leaf;
-        struct nodeInterior * nonLeaf;
-    }left;
-
-    union{
-        struct nodeLeaf * leaf;
-        struct nodeInterior * nonLeaf;
-    }right;
+    struct nodeTree * left;
+    struct nodeTree * right;
 
 }nodeTree;
 
