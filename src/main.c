@@ -4,12 +4,14 @@
 
 //#define TEST_CLOSURE_FUNCTION
 
-#define TOP_DOWN_PR
-
 #ifdef TOP_DOWN_PR
 #include "parser/LL/predictive/parser.h"
 #endif //TOP_DOWN_PR
 
+#define IR_TRANSLATION
+#ifdef IR_TRANSLATION
+#include "parser/LL/predictive/IR/parser.h"
+#endif
 
 #ifdef TOP_DOWN_IT
 #include "parser/LL/iterative/parser.h"
@@ -19,7 +21,6 @@
 #endif //TOP_DOWN_IT
 
 
-#define TEST_CLOSURE_FUNCTION
 
 #ifdef BOTTOM_UP
 #include "parser/LR/testSetItems/testSetItems.h"
@@ -42,10 +43,13 @@
 #include "testHeader.h"
 
 
+
+
 int main(int argc, char ** argv) {
 
     initBuffer();
-    assert(parse());
+    nodeTree * tree = parse();
+    assert(tree -> type == INTERIOR_NODE);
 
     return 0;
 }

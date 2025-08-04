@@ -4,12 +4,12 @@
 
 #include "paths.h"
 #include LEXER_PATH
-#include AST_TOP_DOWN_ITERATIVE
+#include AST_TOP_DOWN_PREDICTIVE
 
 
 
 
-bool parse(void);
+nodeTree * parse(void);
 void expr(void);
 void exprP(void);
 void term(void);

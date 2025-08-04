@@ -26,8 +26,8 @@
 #define BOTTOM_UP_TEST_SUPER_SET_ITEMS "parser/LR/testSuperSetItems/testSuperSetItems.h"
 #define BOTTOM_UP_TEST_GOTO_FUNCTION_PATH "parser/LR/SLR/testGoto/testGoto.h"
 #define BOTTOM_UP_CANONICAL_PARSER_PATH "parser/LR/CanonicalLR/parser.h"
-#define IR_TOP_DOWN_ITERATIVE "parser/LL/predictive/IR/parser.h"
-#define AST_TOP_DOWN_ITERATIVE "parser/LL/predictive/IR/ast.h"
+#define IR_TOP_DOWN_PREDICTIVE "parser/LL/predictive/IR/parser.h"
+#define AST_TOP_DOWN_PREDICTIVE "parser/LL/predictive/IR/ast.h"
 
 
 #endif

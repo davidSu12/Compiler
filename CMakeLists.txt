@@ -10,7 +10,6 @@ option(USE_TOPDOWN "top down" ON)
 
 if (USE_TOPDOWN)
     set(SRC
-            src/parser/LL/predictive/parser.c
             src/parser/LL/predictive/IR/parser.h
             src/parser/LL/predictive/IR/parser.c
             src/parser/LL/predictive/IR/ast.h

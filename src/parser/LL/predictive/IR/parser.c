@@ -22,25 +22,32 @@ void initParser(){
     lookahead = getNextToken();
 }
 
-bool parse(void){
+nodeTree * parse(void){
     initParser();
     expr();
     if(lookahead == NULL){
-        return true;
+        return EXPRNODE;
     }else{
         SyntaxError();
     }
 }
 
+
 void expr(void){
+#ifdef DEBUG
+    printf("%s",__func__);
+#endif
     term();
     EXPRPINHERITED = TERMNODE;
     exprP();
     EXPRNODE = EXPRPNODE;
 }
 void exprP(void){
-
+#ifdef DEBUG
+    printf("%s",__func__);
+#endif
     if(lookahead == NULL){
+        EXPRPNODE = EXPRPINHERITED;
         return;
     }
 
@@ -81,7 +88,9 @@ void exprP(void){
 
 }
 void term(void){
-
+#ifdef DEBUG
+    printf("%s",__func__);
+#endif
     factor();
     TERMPINHERITED = FACTORNODE;
     termP();
@@ -89,8 +98,11 @@ void term(void){
 
 }
 void termP(void){
-
+#ifdef DEBUG
+    printf("%s",__func__);
+#endif
     if(lookahead == NULL){
+        TERMPNODE = TERMPINHERITED;
         return;
     }
 
@@ -131,7 +143,9 @@ void termP(void){
 
 }
 void factor(void){
-
+#ifdef DEBUG
+    printf("%s",__func__);
+#endif
     if(lookahead == NULL){
         return;
     }
