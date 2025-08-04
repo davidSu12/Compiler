@@ -17,6 +17,7 @@ void termP(void);
 void factor(void);
 void match(token simbolo);
 void initParser(void);
+void translateEntry(nodeTree * tree);
 
 
 #endif

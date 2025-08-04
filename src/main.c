@@ -49,7 +49,7 @@ int main(int argc, char ** argv) {
 
     initBuffer();
     nodeTree * tree = parse();
-    assert(tree -> type == INTERIOR_NODE);
+    translateEntry(tree);
 
     return 0;
 }

@@ -11,12 +11,66 @@ static nodeTree * TERMPNODE;
 static nodeTree * FACTORNODE;
 static nodeTree * FACTORSYN;
 static nodeTree * EXPRPINHERITED;
-
+static int tempI = 0;
 
 static void SyntaxError(void) {
     fprintf(stderr, "Syntax error\n");
     exit(EXIT_FAILURE);
 
+}
+
+void translateEntry(nodeTree *tree){
+    if((tree -> left -> type == LEAF_NODE && tree -> right -> type == LEAF_NODE)){
+        printf(
+        "t%d= %s%c%s\n",
+               ++tempI,
+               tree -> left -> entry.lexeme ,
+               simbToChar(simbToChar(tree -> entry.operation)),
+              tree -> right -> entry.lexeme
+              );
+    }else{
+        if((tree -> left -> type != LEAF_NODE) && (tree -> right -> type == LEAF_NODE)){
+            translateEntry(tree -> left);
+            int leftLabel = tempI;
+            char buff[3] = {'\0'};
+            sprintf(buff, "t%d", leftLabel);
+            printf(
+                    "t%d= %s%c%s\n",
+                    ++tempI,
+                    buff,
+                    simbToChar(tree -> entry.operation),
+                    tree -> right ->entry.lexeme
+                    );
+        }else if((tree -> left -> type == LEAF_NODE)&&(tree -> right -> type != LEAF_NODE)){
+            translateEntry(tree -> right);
+            int leftLabel = tempI;
+            char buff[3] = {'\0'};
+            sprintf(buff, "t%d", leftLabel);
+            printf(
+                    "t%d= %s%c%s\n",
+                    ++tempI,
+                    tree -> left -> entry.lexeme,
+                    simbToChar(tree -> entry.operation),
+                    buff
+            );
+        }else{
+            translateEntry(tree -> left);
+            int leftLabel = tempI;
+            translateEntry(tree -> right);
+            int rightLabel = tempI;
+            char buff[5] = {'\0'};
+            char buff1[5] = {'\0'};
+            sprintf(buff, "t%d", leftLabel);
+            sprintf(buff1, "t%d", rightLabel);
+            printf(
+                    "t%d= %s%c%s\n",
+                    ++tempI,
+                    buff,
+                    simbToChar(tree -> entry.operation),
+                    buff1
+                    );
+        }
+    }
 }
 void initParser(){
     lookahead = getNextToken();
@@ -71,6 +125,7 @@ void exprP(void){
         node -> right = TERMNODE;
         EXPRPINHERITED = node;
         exprP();
+        EXPRPNODE = EXPRPINHERITED;
     }else if(lookahead -> label == MINUS){
         node -> type = INTERIOR_NODE;
         node -> entry.operation = MINUS;
@@ -78,8 +133,9 @@ void exprP(void){
         match(MINUS);
         term();
         node -> right = TERMNODE;
-        EXPRINHERITED = node;
+        EXPRPINHERITED = node;
         exprP();
+        EXPRPNODE = EXPRPINHERITED;
     }else{
         EXPRPNODE = EXPRPINHERITED;
         return;
@@ -126,6 +182,7 @@ void termP(void){
         node -> right = FACTORNODE;
         TERMPINHERITED = node;
         termP();
+        TERMPNODE = TERMPINHERITED;
 
     }else if(lookahead -> label == DIV){
         node -> type = INTERIOR_NODE;
@@ -136,6 +193,7 @@ void termP(void){
         node -> right = FACTORNODE;
         TERMPINHERITED = node;
         termP();
+        TERMPNODE = TERMPINHERITED;
     }else{
         TERMPNODE = TERMPINHERITED;
         return;
