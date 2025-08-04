@@ -20,14 +20,17 @@ typedef enum typeNode{
     EMPTY_TREE
 }typeNode;
 
-typedef struct nodeLeaf{
-    char *lexeme;
-}nodeLeaf;
 
-typedef struct nodeInterior{
-    token operation;
+typedef struct nodeTree{
+    typeNode type;
+    union{
+        token operation;
+        char * lexeme;
+    }entry;
+
     typeEntry entryLeft;
     typeEntry entryRight;
+
     union{
         struct nodeLeaf * leaf;
         struct nodeInterior * nonLeaf;
@@ -38,19 +41,9 @@ typedef struct nodeInterior{
         struct nodeInterior * nonLeaf;
     }right;
 
-}nodeInterior;
-
-
-typedef struct nodeTree{
-    union{
-        struct nodeInterior n1;
-        struct nodeLeaf n2;
-    } * entry;
-
-    typeNode type;
-    struct nodeTree *left;
-    struct nodeTree *right;
 }nodeTree;
+
+
 
 typedef struct nodeTree * astTree;
 
