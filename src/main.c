@@ -42,14 +42,14 @@
 
 #include "testHeader.h"
 
+#include TEST_QUADRUPLET_PATH
 
 
 
 int main(int argc, char ** argv) {
 
-    initBuffer();
-    nodeTree * tree = parse();
-    translateEntry(tree);
 
+
+    testDeleteQuadrupletList();
     return 0;
 }
