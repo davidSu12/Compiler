@@ -20,9 +20,9 @@ nodeQuadruplet * createNodeQuadruplet(token operation, char * arg1, char * arg2,
         exit(EXIT_FAILURE);
     }
     temp -> item.operation = operation;
-    temp -> item.arg1 = arg1;
-    temp -> item.arg2 = arg2;
-    temp -> item.result = result;
+    temp -> item.arg1 = arg1_new;
+    temp -> item.arg2 = arg2_new;
+    temp -> item.result = arg3_new;
 
     return temp;
 }

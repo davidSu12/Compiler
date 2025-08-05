@@ -49,7 +49,13 @@
 int main(int argc, char ** argv) {
 
 
+    initBuffer();
+    astTree tree = parse();
+    quadrupletList list;
+    createEmptyQuadrupletList(&list);
+    getQuadrupletList(tree, &list);
 
-    testDeleteQuadrupletList();
+
+
     return 0;
 }
