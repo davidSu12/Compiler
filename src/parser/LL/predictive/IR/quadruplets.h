@@ -27,5 +27,4 @@ void createEmptyQuadrupletList(quadrupletList * list);
 nodeQuadruplet * createNodeQuadruplet(token operation, char * arg1, char * arg2, char * result);
 bool insertNodeQuadruplet(quadrupletList * list, nodeQuadruplet *node);
 void deleteListQuadruplet(quadrupletList * list);
-
 #endif

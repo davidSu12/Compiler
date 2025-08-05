@@ -8,7 +8,6 @@ Just testing the IR code
 
 
 **Output:**
-
 t1 = 24 * 3
 t2 = 56 / 7
 t3 = t1 - t2
