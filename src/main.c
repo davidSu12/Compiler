@@ -51,11 +51,16 @@ int main(int argc, char ** argv) {
 
     initBuffer();
     astTree tree = parse();
+    translateEntry(tree);
+    /*
     quadrupletList list;
     createEmptyQuadrupletList(&list);
     getQuadrupletList(tree, &list);
+    for(nodeQuadruplet *temp = list.first; temp != NULL; temp = temp -> next){
+        printf("%s=%s%c%s\n",temp -> item.result, temp->item.arg1, simbToChar(temp -> item.operation), temp -> item.arg2);
+    }
 
-
+     */
 
     return 0;
 }

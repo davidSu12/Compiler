@@ -56,6 +56,7 @@ void getQuadrupletList(nodeTree * tree, quadrupletList *L){
             char buff[5] = {'\0'};
             sprintf(buff, "t%d", rightLabel);
             char buff1[5] = {'\0'};
+            sprintf(buff1, "t%d", ++tempI);
 
             nodeQuadruplet * node = createNodeQuadruplet(
                     tree ->entry.operation,
@@ -100,7 +101,7 @@ void translateEntry(nodeTree *tree){
         if((tree -> left -> type != LEAF_NODE) && (tree -> right -> type == LEAF_NODE)){
             translateEntry(tree -> left);
             int leftLabel = tempI;
-            char buff[3] = {'\0'};
+            char buff[5] = {'\0'};
             sprintf(buff, "t%d", leftLabel);
             printf(
                     "t%d= %s%c%s\n",
@@ -112,7 +113,7 @@ void translateEntry(nodeTree *tree){
         }else if((tree -> left -> type == LEAF_NODE)&&(tree -> right -> type != LEAF_NODE)){
             translateEntry(tree -> right);
             int leftLabel = tempI;
-            char buff[3] = {'\0'};
+            char buff[5] = {'\0'};
             sprintf(buff, "t%d", leftLabel);
             printf(
                     "t%d= %s%c%s\n",
