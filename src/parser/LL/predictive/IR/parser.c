@@ -19,6 +19,74 @@ static void SyntaxError(void) {
 
 }
 
+void getQuadrupletList(nodeTree * tree, quadrupletList *L){
+    if((tree -> left -> type == LEAF_NODE && tree -> right -> type == LEAF_NODE)){
+
+        char buff[5] = {'\0'};
+        sprintf(buff, "t%d", ++tempI);
+
+        nodeQuadruplet *q = createNodeQuadruplet(
+                tree -> entry.operation,
+                tree -> left -> entry.lexeme,
+                tree -> right -> entry.lexeme,
+                buff);
+
+        insertNodeQuadruplet(L, q);
+    }else{
+
+        if((tree -> left -> type != LEAF_NODE) && (tree -> right -> type == LEAF_NODE)){
+            getQuadrupletList(tree -> left, L);
+            int leftLabel = tempI;
+            char buff[5] = {'\0'};
+            sprintf(buff, "t%d", leftLabel);
+            char buff1[5] = {'\0'};
+            sprintf(buff1, "t%d", ++tempI);
+
+            nodeQuadruplet *node = createNodeQuadruplet(
+                    tree -> entry.operation,
+                    buff,
+                    tree -> right ->entry.lexeme,
+                    buff1
+                    );
+            insertNodeQuadruplet(L, node);
+
+        }else if((tree -> left -> type == LEAF_NODE)&&(tree -> right -> type != LEAF_NODE)){
+            getQuadrupletList(tree -> right, L);
+            int rightLabel = tempI;
+            char buff[5] = {'\0'};
+            sprintf(buff, "t%d", rightLabel);
+            char buff1[5] = {'\0'};
+
+            nodeQuadruplet * node = createNodeQuadruplet(
+                    tree ->entry.operation,
+                    tree -> left -> entry.lexeme,
+                    buff,
+                    buff1
+                    );
+            insertNodeQuadruplet(L, node);
+
+        }else{
+            getQuadrupletList(tree -> left,L);
+            int leftLabel = tempI;
+            getQuadrupletList(tree -> right,L);
+            int rightLabel = tempI;
+            char buff[5] = {'\0'};
+            char buff1[5] = {'\0'};
+            char buff2[5] = {'\0'};
+            sprintf(buff, "t%d", leftLabel);
+            sprintf(buff1, "t%d", rightLabel);
+            sprintf(buff2, "t%d", ++tempI);
+
+            nodeQuadruplet *node = createNodeQuadruplet(
+                    tree -> entry.operation,
+                    buff,
+                    buff1,
+                    buff2
+                    );
+            insertNodeQuadruplet(L, node);
+        }
+    }
+}
 void translateEntry(nodeTree *tree){
     if((tree -> left -> type == LEAF_NODE && tree -> right -> type == LEAF_NODE)){
         printf(

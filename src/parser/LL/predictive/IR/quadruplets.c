@@ -6,7 +6,11 @@ void createEmptyQuadrupletList(quadrupletList * list){
 nodeQuadruplet * createNodeQuadruplet(token operation, char * arg1, char * arg2, char * result){
 
     nodeQuadruplet * temp = malloc(sizeof(struct nodeQuadruplet));
-    if(temp == NULL){
+    char * arg1_new = strdup(arg1);
+    char * arg2_new = strdup(arg2);
+    char * arg3_new = strdup(result);
+
+    if(!temp || !arg1_new || !arg2_new || !arg3_new){
         fprintf(
                 stderr,
                 "An error has ocurred on func:%s\non:%s\nin line:%d\n",

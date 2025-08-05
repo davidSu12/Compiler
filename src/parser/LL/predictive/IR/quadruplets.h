@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
 typedef struct itemQuadruplet{
     token operation;
