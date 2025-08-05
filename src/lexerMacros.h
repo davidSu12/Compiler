@@ -17,7 +17,7 @@
 
 
 #define END '\0'
-#define MAX_LEN_BUFF 1024
+#define MAX_LEN_BUFF 4096
 #define LNULL NULL
 
 #define ISNULLTOKEN(s) (s == LNULL)

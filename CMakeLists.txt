@@ -13,7 +13,8 @@ if (USE_TOPDOWN)
             src/parser/LL/predictive/IR/parser.h
             src/parser/LL/predictive/IR/parser.c
             src/parser/LL/predictive/IR/ast.h
-            src/parser/LL/predictive/IR/ast.c
+            src/parser/LL/predictive/IR/quadruplets.h
+            src/parser/LL/predictive/IR/quadruplets.c
     )
 else()
 

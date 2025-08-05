@@ -28,6 +28,7 @@
 #define BOTTOM_UP_CANONICAL_PARSER_PATH "parser/LR/CanonicalLR/parser.h"
 #define IR_TOP_DOWN_PREDICTIVE "parser/LL/predictive/IR/parser.h"
 #define AST_TOP_DOWN_PREDICTIVE "parser/LL/predictive/IR/ast.h"
+#define TOP_DOWN_QUADRUPLET_PATH "parser/LL/predictive/IR/quadruplets.h"
 
 
 #endif
