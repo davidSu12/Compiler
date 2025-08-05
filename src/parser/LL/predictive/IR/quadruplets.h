@@ -4,6 +4,8 @@
 #include TOKEN_PATH
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <assert.h>
 
 typedef struct itemQuadruplet{
     token operation;
@@ -27,4 +29,6 @@ void createEmptyQuadrupletList(quadrupletList * list);
 nodeQuadruplet * createNodeQuadruplet(token operation, char * arg1, char * arg2, char * result);
 bool insertNodeQuadruplet(quadrupletList * list, nodeQuadruplet *node);
 void deleteListQuadruplet(quadrupletList * list);
+bool isEmptyListQuadruplets(quadrupletList l);
+
 #endif
